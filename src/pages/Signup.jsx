@@ -40,7 +40,8 @@ const location = useLocation();
           })
             .then((res) => res.json())
             .then((res) => {
-              setUser(res.user)
+              setUser(res.user);
+              setError(null);
             });
         })
         .catch((error) => {
@@ -91,7 +92,7 @@ const location = useLocation();
               placeholder="Password"
               required
             />
-            <button
+            <div
               onClick={(e) => {
                 e.preventDefault();
                 setShow(!show);
@@ -99,7 +100,7 @@ const location = useLocation();
               className="absolute bottom-3 right-5 z-1"
             >
               {show ? <FaEyeSlash /> : <FaEye />}
-            </button>
+            </div>
           </div>
 
           <button type="submit" className="btn btn-neutral mt-4">

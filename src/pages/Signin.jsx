@@ -43,7 +43,7 @@ const Signin = () => {
     <div>
       <form onSubmit={handleSignin}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto">
-          <legend className="fieldset-legend">SignIn</legend>
+          <legend className="fieldset-legend text-2xl font-bold">SignIn</legend>
 
           <label className="label">Email</label>
           <input
@@ -62,7 +62,7 @@ const Signin = () => {
               placeholder="Password"
               required
             />
-            <button
+            <div
               onClick={(e) => {
                 e.preventDefault();
                 setShow(!show);
@@ -70,7 +70,7 @@ const Signin = () => {
               className="absolute bottom-3 right-5 z-1"
             >
               {show ? <FaEyeSlash /> : <FaEye />}
-            </button>
+            </div>
           </div>
 
           <button type="submit" className="btn btn-neutral mt-4">
@@ -85,7 +85,7 @@ const Signin = () => {
             className="btn hover:border hover:border-black flex gap-2"
           >
             <FcGoogle size={20} />
-            Sign Up With Google
+            Sign In With Google
           </button>
           {errorData && (
             <div className="p-2 border text-center rounded-sm bg-red-100 border-red-600">
