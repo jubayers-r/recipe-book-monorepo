@@ -36,6 +36,15 @@ async function run() {
 
     // Connect the client to the server	(optional starting in v4.7)
 
+    const UsersDB = client.db("recipe_app").collection("users");
+
+    // user related apis
+    app.post('/users', async(req, res) => {
+      const userProfile = req.body;
+      const result = await UsersDB.insertOne(userProfile);
+      res.send(result);
+    })
+
     await client.connect();
 
     // Send a ping to confirm a successful connection
