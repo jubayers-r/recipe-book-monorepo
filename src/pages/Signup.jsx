@@ -1,0 +1,132 @@
+import React, { use, useEffect, useState } from "react";
+import { AuthContext } from "../context/authcontext/AuthContext";
+import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+const Signup = () => {
+  const { signup, googleLogin, stateData, error, setError } = use(AuthContext);
+  const [show, setShow] = useState(false);
+
+  const navigate = useNavigate();
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { email, password, ...rest } = Object.fromEntries(formData.entries());
+
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Minimum password length needs to be 6, and should include atleast one Uppercase and one Lowercase alphabet"
+      );
+    } else {
+      signup(email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          const userProfile = {
+            email,
+            ...rest,
+            creationTime: user?.metadata?.creationTime,
+            lastSignInTime: user?.metadata?.lastSignInTime,
+          };
+
+          fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(userProfile),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+            });
+        })
+        .catch((error) => {
+          if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+            setError(
+              "Email Already in use! Please login or try registering with a different email."
+            );
+          } else {
+            setError(error.message);
+          }
+        });
+    }
+  };
+  useEffect(() => {
+    setError(null);
+  }, [location.pathname]);
+  return (
+    <div>
+      <form onSubmit={handleSignup}>
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto">
+          <legend className="fieldset-legend text-2xl font-bold">SignUp</legend>
+
+          <label className="label">Name</label>
+          <input name="name" type="text" className="input" placeholder="Name" />
+
+          <label className="label">Email</label>
+          <input
+            name="email"
+            type="email"
+            className="input"
+            placeholder="Email"
+          />
+
+          <label className="label">PhotoURL</label>
+          <input
+            name="url"
+            type="text"
+            className="input"
+            placeholder="PhotoURL"
+          />
+
+          <div className="relative">
+            <label className="label ">Password</label>
+            <input
+              name="password"
+              type={show ? "text" : "password"}
+              className="input"
+              placeholder="Password"
+              required
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShow(!show);
+              }}
+              className="absolute bottom-3 right-5 z-1"
+            >
+              {show ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+
+          <button type="submit" className="btn btn-neutral mt-4">
+            Sign Up
+          </button>
+          <button
+            onClick={() =>
+              googleLogin().then(() =>
+                navigate(stateData ? `${stateData}` : "/")
+              )
+            }
+            className="btn hover:border hover:border-black flex gap-2"
+          >
+            <FcGoogle size={20} />
+            Sign Up With Google
+          </button>
+          {error && (
+            <div className="w-full text-center">
+              <p className="p-2 border text-center rounded-sm bg-red-100 border-red-600">
+                {error}
+              </p>
+            </div>
+          )}
+        </fieldset>
+      </form>
+    </div>
+  );
+};
+
+export default Signup;
