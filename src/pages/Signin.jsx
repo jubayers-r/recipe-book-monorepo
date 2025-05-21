@@ -1,16 +1,44 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/authcontext/AuthContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router";
+import { FcGoogle } from "react-icons/fc";
 
 const Signin = () => {
-    const {signin} = use(AuthContext);
-    const handleSignin = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        
-    }
+  const { signin, googleLogin, error, stateData, setError, setUser } =
+    use(AuthContext);
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const location = useLocation();
+  const handleSignin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { email, password } = Object.fromEntries(formData.entries());
+    signin(email, password)
+      .then((res) => {
+        setUser(res.user);
+      })
+      .catch((error) => setError(error.message));
+  };
+  const errorMessages = {
+    "Firebase: Error (auth/invalid-credential).": {
+      title: "Wrong credentials",
+      message: "Invalid email or password",
+    },
+    "Firebase: Error (auth/missing-password).": {
+      title: "Wrong credentials",
+      message: "Invalid email or password",
+    },
+    "Firebase: Error (auth/invalid-email).": {
+      title: "Wrong credentials",
+      message: "Invalid email",
+    },
+  };
+  const errorData = errorMessages[error];
+  useEffect(() => {
+    setError(null);
+  }, [location.pathname]);
   return (
     <div>
       <form onSubmit={handleSignin}>
@@ -18,12 +46,55 @@ const Signin = () => {
           <legend className="fieldset-legend">SignIn</legend>
 
           <label className="label">Email</label>
-          <input name="email" type="email" className="input" placeholder="Email" />
+          <input
+            name="email"
+            type="email"
+            className="input"
+            placeholder="Email"
+          />
 
-          <label className="label">Password</label>
-          <input name="password" type="password" className="input" placeholder="Password" />
+          <div className="relative">
+            <label className="label ">Password</label>
+            <input
+              name="password"
+              type={show ? "text" : "password"}
+              className="input"
+              placeholder="Password"
+              required
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShow(!show);
+              }}
+              className="absolute bottom-3 right-5 z-1"
+            >
+              {show ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
 
-          <button type="submit" className="btn btn-neutral mt-4">Login</button>
+          <button type="submit" className="btn btn-neutral mt-4">
+            Login
+          </button>
+          <button
+            onClick={() =>
+              googleLogin().then(() =>
+                navigate(stateData ? `${stateData}` : "/")
+              )
+            }
+            className="btn hover:border hover:border-black flex gap-2"
+          >
+            <FcGoogle size={20} />
+            Sign Up With Google
+          </button>
+          {errorData && (
+            <div className="p-2 border text-center rounded-sm bg-red-100 border-red-600">
+              {errorData.title && (
+                <p className="text-sm font-bold">{errorData.title}</p>
+              )}
+              <p>{errorData.message}</p>
+            </div>
+          )}
         </fieldset>
       </form>
     </div>

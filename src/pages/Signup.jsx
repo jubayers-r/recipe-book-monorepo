@@ -1,13 +1,13 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/authcontext/AuthContext";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
-  const { signup, googleLogin, stateData, error, setError } = use(AuthContext);
+  const { signup, googleLogin, stateData, error, setError, setUser } = use(AuthContext);
   const [show, setShow] = useState(false);
-
+const location = useLocation();
   const navigate = useNavigate();
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
   const handleSignup = (e) => {
@@ -40,7 +40,7 @@ const Signup = () => {
           })
             .then((res) => res.json())
             .then((res) => {
-              console.log(res);
+              setUser(res.user)
             });
         })
         .catch((error) => {
