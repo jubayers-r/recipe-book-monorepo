@@ -24,7 +24,6 @@ const RecipeDetails = () => {
     email,
   } = selectedRecipe;
 
-  const { user } = use(AuthContext);
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
@@ -50,6 +49,7 @@ const RecipeDetails = () => {
                 icon: "success",
               });
             }
+            navigate(-1);
           });
       }
     });
@@ -94,8 +94,10 @@ const RecipeDetails = () => {
           ))}
         </div>
         <p className="font-bold">
-          Estimated making time:{" "}
-          <span className="font-medium">{preparationTime} Minutes</span>
+          Estimated making time:
+          <span className="font-medium">
+            {preparationTime ? `${preparationTime} Minutes` : "Not Provided"}{" "}
+          </span>
         </p>
         <p className="text-2xl">{instructions}</p>
         {email && (

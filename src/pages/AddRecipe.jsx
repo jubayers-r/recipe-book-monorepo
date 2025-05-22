@@ -1,9 +1,11 @@
 import React, { use, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import { AuthContext } from "../context/authcontext/AuthContext";
+import { useNavigate } from "react-router";
 
 const AddRecipe = () => {
   const { user } = use(AuthContext);
+  const navigate = useNavigate();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -51,6 +53,7 @@ const AddRecipe = () => {
             transition: Bounce,
           });
           form.reset();
+          navigate('/recipes')
         }
       });
   };

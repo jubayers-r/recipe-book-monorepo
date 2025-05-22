@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 
 const Signin = () => {
-  const { signin, googleLogin, error, stateData, setError, setUser } =
+  const { signin, googleLogin, error, stateData, setError, setUser, user } =
     use(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -18,6 +18,19 @@ const Signin = () => {
     signin(email, password)
       .then((res) => {
         setUser(res.user);
+        const authInfo = {
+          email,
+          lastSignInTime: res.user?.metadata?.lastSignInTime,
+        };
+        fetch("http://localhost:3000/users", {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(authInfo),
+        })
+          .then((res) => res.json())
+          .then((res) => console.log(res));
       })
       .catch((error) => setError(error.message));
   };
