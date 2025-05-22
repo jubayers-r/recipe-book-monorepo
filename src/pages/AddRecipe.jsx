@@ -99,7 +99,7 @@ const AddRecipe = () => {
             <select
               className="bg-white h-10 rounded-sm px-2 hover:brightness-75 w-full"
               id="cuisine"
-              name="cuisine"
+              name="cuisineType"
               required
             >
               <option value="" disabled defaultValue>
@@ -128,7 +128,7 @@ const AddRecipe = () => {
           </div>
           <label className="label">Preparation Time (in Minutes)</label>
           <input
-            name="time"
+            name="preparationTime"
             type="number"
             className="input w-full"
             placeholder="eg. 10"
