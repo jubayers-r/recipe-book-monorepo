@@ -21,16 +21,16 @@ const MyRecipes = () => {
   }
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
-      {data ? (
-        data.map((recipe) => <RecipeCard key={recipe._id} recipe={recipe} />)
-      ) : (
+      {data.length == 0 ?(
         <div className="space-y-10 mx-auto text-center col-span-4 mt-10">
           <p className="font-bold text-2xl">You Haven't Post any recipe yet</p>
           <Link to={"/addRecipe"}>
             <button className="btn">Post Now</button>
           </Link>
         </div>
-      )}
+      ) : (
+        data.map((recipe) => <RecipeCard key={recipe._id} recipe={recipe} />)
+      ) }
     </div>
   );
 };
