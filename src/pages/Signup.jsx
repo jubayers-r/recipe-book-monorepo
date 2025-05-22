@@ -3,18 +3,23 @@ import { AuthContext } from "../context/authcontext/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../firebase/firebase.init";
 
 const Signup = () => {
-  const { signup, googleLogin, stateData, error, setError, setUser } = use(AuthContext);
+  const { signup, googleLogin, stateData, error, setError, setUser } =
+    use(AuthContext);
   const [show, setShow] = useState(false);
-const location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
   const handleSignup = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const { email, password, ...rest } = Object.fromEntries(formData.entries());
+    const { email, password, name, url, ...rest } = Object.fromEntries(
+      formData.entries()
+    );
 
     if (!passwordRegex.test(password)) {
       setError(
@@ -22,27 +27,38 @@ const location = useLocation();
       );
     } else {
       signup(email, password)
-        .then((userCredential) => {
-          // Signed up
-          const user = userCredential.user;
-          console.log(user);
-          const userProfile = {
-            email,
-            ...rest,
-            creationTime: user?.metadata?.creationTime,
-            lastSignInTime: user?.metadata?.lastSignInTime,
-          };
+        .then(() => {
+          updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: url,
+          }).then(() => {
+            const user = {
+              // so that i don't forget, it was done because initially firebase cant load the update profile version of name and other things. it needs to reload the page to show the updated things which i didn't want, so we had to store the info to state that initially the ux doesn't get harmed.
+              ...auth.currentUser,
+              displayName: name,
+              photoURL: url,
+            };
 
-          fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(userProfile),
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              setUser(res.user);
-              setError(null);
-            });
+            const updateProfile = {
+              email,
+              name,
+              url,
+              ...rest,
+              creationTime: user?.metadata?.creationTime,
+              lastSignInTime: user?.metadata?.lastSignInTime,
+            };
+
+            fetch("http://localhost:3000/users", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(updateProfile),
+            })
+              .then((res) => res.json())
+              .then(() => {
+                setUser(user);
+                setError(null);
+              });
+          });
         })
         .catch((error) => {
           if (error.message == "Firebase: Error (auth/email-already-in-use).") {
@@ -65,7 +81,13 @@ const location = useLocation();
           <legend className="fieldset-legend text-2xl font-bold">SignUp</legend>
 
           <label className="label">Name</label>
-          <input name="name" type="text" className="input" placeholder="Name" required/>
+          <input
+            name="name"
+            type="text"
+            className="input"
+            placeholder="Name"
+            required
+          />
 
           <label className="label">Email</label>
           <input

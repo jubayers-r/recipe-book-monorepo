@@ -23,7 +23,7 @@ const AddRecipe = () => {
     const ingredientsArray = data.ingredients.split(',').map(item => item.trim());
     data.ingredients = ingredientsArray;
     // add category state array instead of one checkbox
-    data.categories = selectedCategories;
+    data.category = selectedCategories;
     // add universal time to database
     data.postTimestampUTC = new Date().toISOString();
     // add useremail
