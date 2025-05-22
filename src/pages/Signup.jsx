@@ -65,7 +65,7 @@ const location = useLocation();
           <legend className="fieldset-legend text-2xl font-bold">SignUp</legend>
 
           <label className="label">Name</label>
-          <input name="name" type="text" className="input" placeholder="Name" />
+          <input name="name" type="text" className="input" placeholder="Name" required/>
 
           <label className="label">Email</label>
           <input
@@ -73,12 +73,13 @@ const location = useLocation();
             type="email"
             className="input"
             placeholder="Email"
+            required
           />
 
           <label className="label">PhotoURL</label>
           <input
             name="url"
-            type="text"
+            type="url"
             className="input"
             placeholder="PhotoURL"
           />

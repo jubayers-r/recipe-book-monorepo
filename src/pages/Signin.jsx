@@ -51,6 +51,7 @@ const Signin = () => {
             type="email"
             className="input"
             placeholder="Email"
+            required
           />
 
           <div className="relative">
