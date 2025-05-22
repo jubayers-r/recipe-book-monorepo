@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Outlet } from "react-router";
 // import { Outlet, useLocation } from "react-router";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const MainLayout = () => {
 //   const location = useLocation();
@@ -29,7 +29,7 @@ const MainLayout = () => {
       <main className="flex-grow flex flex-col justify-center mb-15 mt-4 w-9/11 mx-auto">
         <Outlet />
       </main>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       <Footer />
     </div>
   );

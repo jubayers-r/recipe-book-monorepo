@@ -1,27 +1,93 @@
-import React from "react";
+import React, { use, useState } from "react";
+import { Bounce, toast } from "react-toastify";
+import { AuthContext } from "../context/authcontext/AuthContext";
 
 const AddRecipe = () => {
+  const { user } = use(AuthContext);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const handleCategoryChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelectedCategories((prev) => [...prev, value]);
+    } else {
+      setSelectedCategories((prev) => prev.filter((c) => c !== value));
+    }
+  };
+
+  const handleShare = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    // convert ingredients to an array
+    const ingredientsArray = data.ingredients.split(',').map(item => item.trim());
+    data.ingredients = ingredientsArray;
+    // add category state array instead of one checkbox
+    data.categories = selectedCategories;
+    // add universal time to database
+    data.postTimestampUTC = new Date().toISOString();
+    // add useremail
+    data.email = user.email;
+
+    fetch("http://localhost:3000/recipes", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.acknowledged) {
+          toast.success("Posted Successfully", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          form.reset();
+        }
+      });
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleShare}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[70%] border p-4 mx-auto">
           <legend className="fieldset-legend font-bold sm:text-lg lg:text-2xl text-center">
             Share Your Recipe to the World
           </legend>
-
           <label className="label">Title</label>
-          <input type="text" className="input w-full" placeholder="Title" required />
-          <label className="label">Image URL</label>
-          <input type="url" className="input w-full" placeholder="Image URL" />
-          <label className="label">Ingredients</label>
           <input
+            name="title"
             type="text"
             className="input w-full"
-            placeholder="eg. Egg Yogurt Sugar"
+            placeholder="Title"
+            required
+          />
+          <label className="label">Image URL</label>
+          <input
+            name="imageURL"
+            type="url"
+            className="input w-full"
+            placeholder="Image URL"
+          />
+          <label className="label">Ingredients</label>
+          <input
+            name="ingredients"
+            type="text"
+            className="input w-full"
+            placeholder="eg. Egg, White wine, Sugar "
             required
           />
           <label className="label">Instructions</label>
           <textarea
+            name="instructions"
             className="input w-full min-h-[100px] resize-y rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Instructions"
             required
@@ -36,7 +102,7 @@ const AddRecipe = () => {
               name="cuisine"
               required
             >
-              <option value="" disabled selected>
+              <option value="" disabled defaultValue>
                 Select Cuisine
               </option>
               <option value="italian">Italian</option>
@@ -61,7 +127,12 @@ const AddRecipe = () => {
             </select>
           </div>
           <label className="label">Preparation Time (in Minutes)</label>
-          <input type="number" className="input w-full" placeholder="eg. 10" />
+          <input
+            name="time"
+            type="number"
+            className="input w-full"
+            placeholder="eg. 10"
+          />
           <fieldset className="border border-gray-300 rounded-md p-4">
             <legend className="text-lg font-semibold mb-2 px-2">
               Categories
@@ -69,6 +140,7 @@ const AddRecipe = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="breakfast"
                   name="category"
@@ -80,6 +152,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="lunch"
                   name="category"
@@ -91,6 +164,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="dinner"
                   name="category"
@@ -102,6 +176,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="dessert"
                   name="category"
@@ -113,6 +188,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="vegan"
                   name="category"
@@ -124,6 +200,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="vegetarian"
                   name="category"
@@ -135,6 +212,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="glutenFree"
                   name="category"
@@ -145,13 +223,20 @@ const AddRecipe = () => {
                 </label>
               </div>
               <div>
-                <input type="checkbox" id="keto" name="category" value="keto" />
+                <input
+                  onChange={handleCategoryChange}
+                  type="checkbox"
+                  id="keto"
+                  name="category"
+                  value="keto"
+                />
                 <label htmlFor="keto" className="ml-2">
                   Keto
                 </label>
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="paleo"
                   name="category"
@@ -163,6 +248,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="snacks"
                   name="category"
@@ -174,6 +260,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="drinks"
                   name="category"
@@ -185,6 +272,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="appetizer"
                   name="category"
@@ -195,13 +283,20 @@ const AddRecipe = () => {
                 </label>
               </div>
               <div>
-                <input type="checkbox" id="soup" name="category" value="soup" />
+                <input
+                  onChange={handleCategoryChange}
+                  type="checkbox"
+                  id="soup"
+                  name="category"
+                  value="soup"
+                />
                 <label htmlFor="soup" className="ml-2">
                   Soup
                 </label>
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="salad"
                   name="category"
@@ -212,13 +307,20 @@ const AddRecipe = () => {
                 </label>
               </div>
               <div>
-                <input type="checkbox" id="bbq" name="category" value="bbq" />
+                <input
+                  onChange={handleCategoryChange}
+                  type="checkbox"
+                  id="bbq"
+                  name="category"
+                  value="bbq"
+                />
                 <label htmlFor="bbq" className="ml-2">
                   BBQ
                 </label>
               </div>
               <div>
                 <input
+                  onChange={handleCategoryChange}
                   type="checkbox"
                   id="holiday"
                   name="category"
@@ -230,7 +332,9 @@ const AddRecipe = () => {
               </div>
             </div>
           </fieldset>
-          <button className="btn btn-neutral mt-4">Post</button>
+          <button type="submit" className="btn btn-neutral mt-4">
+            Post
+          </button>
         </fieldset>
       </form>
     </div>
