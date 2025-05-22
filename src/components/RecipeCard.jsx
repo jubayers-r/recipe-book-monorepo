@@ -23,7 +23,6 @@ const RecipeCard = ({ recipe }) => {
       (instructions.split(" ").length > maxWords ? "..." : "")
     : "No instructions provided.";
 
-  console.log(cuisineType);
   return (
     <div className="card bg-base-100 shadow-sm">
       <figure className="w-full h-50">
@@ -34,12 +33,14 @@ const RecipeCard = ({ recipe }) => {
           {title}
           <div className="badge badge-secondary">{cuisineType}</div>
         </h2>
-        <p>{truncatedInstructions}</p>
         <div className="card-actions justify-end">
-          {
-            // category?.map((cat, index) => <div key={index} className="badge badge-outline">{cat}</div>)
-          }
+        {category.map((category, index) => (
+                <p key={index} className="font-semibold border p-1 rounded-lg hover:bg-green-600 hover:text-white text-center">
+                  {category}
+                </p>
+              ))}
         </div>
+        <p>{truncatedInstructions}</p>
       </div>
       <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
         <div className="btn ">

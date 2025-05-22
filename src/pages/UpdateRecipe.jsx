@@ -1,8 +1,10 @@
+
+
 import React, { use, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import { AuthContext } from "../context/authcontext/AuthContext";
 
-const AddRecipe = () => {
+const UpdateRecipe = () => {
   const { user } = use(AuthContext);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const handleCategoryChange = (e) => {
@@ -60,7 +62,7 @@ const AddRecipe = () => {
       <form onSubmit={handleShare}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[70%] border p-4 mx-auto">
           <legend className="fieldset-legend font-bold sm:text-lg lg:text-2xl text-center">
-            Share Your Recipe to the World
+            Update Your Recipe
           </legend>
           <label className="label">Title</label>
           <input
@@ -333,7 +335,7 @@ const AddRecipe = () => {
             </div>
           </fieldset>
           <button type="submit" className="btn btn-neutral mt-4">
-            Post
+            Update
           </button>
         </fieldset>
       </form>
@@ -341,4 +343,4 @@ const AddRecipe = () => {
   );
 };
 
-export default AddRecipe;
+export default UpdateRecipe;

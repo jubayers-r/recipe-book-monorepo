@@ -4,6 +4,7 @@ import { AuthContext } from "../context/authcontext/AuthContext";
 import { CgProfile } from "react-icons/cg";
 import { FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const RecipeDetails = () => {
   const mongoId = useParams().id;
@@ -20,10 +21,39 @@ const RecipeDetails = () => {
     category,
     likeCount,
     _id,
+    email,
   } = selectedRecipe;
 
   const { user } = use(AuthContext);
   const navigate = useNavigate();
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/myRecipes/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your recipe has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div>
@@ -40,19 +70,25 @@ const RecipeDetails = () => {
             <h3 className="sm:text-4xl font-semibold">{title}</h3>
             <h3 className="sm:text-lg my-2">({cuisineType})</h3>
             <div className="flex gap-2 font-black my-2 items-center">
-              {category.map((ingredient) => (
-                <p className="font-semibold border p-1 rounded-lg hover:bg-green-600 hover:text-white">
-                  {ingredient}
+              {category.map((category, index) => (
+                <p
+                  key={index}
+                  className="font-semibold border p-1 rounded-lg hover:bg-green-600 hover:text-white"
+                >
+                  {category}
                 </p>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="flex gap-2 font-black mt-5 items-center">
+        <div className="flex gap-2 font-black mt-5 mb-2 items-center">
           Ingredients:
-          {ingredients.map((ingredient) => (
-            <p className="font-semibold border p-1 rounded-lg hover:bg-green-600 hover:text-white">
+          {ingredients.map((ingredient, index) => (
+            <p
+              key={index}
+              className="font-semibold border p-1 rounded-lg hover:bg-green-600 hover:text-white"
+            >
               {ingredient}
             </p>
           ))}
@@ -62,15 +98,25 @@ const RecipeDetails = () => {
           <span className="font-medium">{preparationTime} Minutes</span>
         </p>
         <p className="text-2xl">{instructions}</p>
-        {/* <div className="mx-auto my-auto text-center ">
-          <div className="flex justify-center">
-            <Link to={"/edit"}>
-              <button className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit">
-                Update <FaEdit />
-              </button>
-            </Link>
+        {email && (
+          <div className="mx-auto my-auto text-center ">
+            <div className="flex justify-center">
+              <div className="flex">
+                <Link to={"/edit"}>
+                  <button className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit">
+                    Update <FaEdit />
+                  </button>
+                </Link>
+                <button
+                  onClick={() => handleDelete(_id)}
+                  className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit"
+                >
+                  Delete <FaEdit />
+                </button>
+              </div>
+            </div>
           </div>
-        </div> */}
+        )}
       </div>
       <div className="flex justify-center">
         <button
