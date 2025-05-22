@@ -2,6 +2,7 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { LiaComments } from "react-icons/lia";
 import { FaShareAlt } from "react-icons/fa";
+import { Link } from "react-router";
 
 const RecipeCard = ({ recipe }) => {
   const {
@@ -13,8 +14,9 @@ const RecipeCard = ({ recipe }) => {
     preparationTime,
     category,
     likeCount,
+    _id
   } = recipe;
-// truncation function for show more ux
+  // truncation function for show more ux
   const maxWords = 12;
   const truncatedInstructions = instructions
     ? instructions.split(" ").slice(0, maxWords).join(" ") +
@@ -40,12 +42,17 @@ const RecipeCard = ({ recipe }) => {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
-        <div className="btn "><CiHeart size={25} /> {likeCount}</div>
-        <div className="btn "><LiaComments size={25} /> Discussion</div>
-
+        <div className="btn ">
+          <CiHeart size={25} /> {likeCount}
+        </div>
+        <div className="btn ">
+          <LiaComments size={25} /> Discussion
+        </div>
       </div>
       <div className="flex justify-center my-2">
-      <button className="btn w-fit">Read Full Recipe</button>
+        <Link to={`/recipeDetails/${_id}`}>
+          <button className="btn w-fit">Read Full Recipe</button>
+        </Link>
       </div>
     </div>
   );

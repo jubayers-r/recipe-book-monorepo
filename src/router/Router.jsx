@@ -5,6 +5,7 @@ import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import AddRecipe from "../pages/AddRecipe";
 import AllRecipes from "../pages/AllRecipes";
+import RecipeDetails from "../pages/RecipeDetails";
 
 export const router = createBrowserRouter([
     {
@@ -30,8 +31,9 @@ export const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:3000/recipes')
             },
             {
-                path: 'recipeDetails',
-                Component: AddRecipe
+                path: 'recipeDetails/:id',
+                Component: RecipeDetails,
+                loader: () => fetch('http://localhost:3000/recipes')
             },
         ]
     }
