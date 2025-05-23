@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Playwrite+HU:wght@100..400&family=Poetsen+One&display=swap');
 @import "tailwindcss";
 @plugin "daisyui" {
 themes: light --default;

@@ -1,5 +1,6 @@
 import React from "react";
 import RecipeCard from "./RecipeCard";
+import { Link } from "react-router";
 
 const TopRecipes = ({ topRecipes }) => {
   return (
@@ -9,6 +10,15 @@ const TopRecipes = ({ topRecipes }) => {
         {topRecipes.map((recipe) => (
           <RecipeCard recipe={recipe} />
         ))}
+      </div>
+      <div className="flex justify-center">
+        <Link to={"/recipes"}>
+        <button
+          className="btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 btn-lg flex w-fit"
+        >
+          See All Recipes
+        </button>
+        </Link>
       </div>
     </div>
   );
