@@ -48,7 +48,7 @@ const Signup = () => {
               lastSignInTime: user?.metadata?.lastSignInTime,
             };
 
-            fetch("http://localhost:3000/users", {
+            fetch("https://recipe-book-app-eosin.vercel.app/users", {
               method: "POST",
               headers: { "content-type": "application/json" },
               body: JSON.stringify(updateProfile),

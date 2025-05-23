@@ -16,7 +16,7 @@ export const handleLikeAPI = (id, currentLike, email) => {
         `,
     });
   } else {
-    fetch(`http://localhost:3000/recipes/${id}`, {
+    fetch(`https://recipe-book-app-eosin.vercel.app/recipes/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

@@ -22,7 +22,7 @@ const Signin = () => {
           email,
           lastSignInTime: res.user?.metadata?.lastSignInTime,
         };
-        fetch("http://localhost:3000/users", {
+        fetch("https://recipe-book-app-eosin.vercel.app/users", {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
@@ -30,7 +30,7 @@ const Signin = () => {
           body: JSON.stringify(authInfo),
         })
           .then((res) => res.json())
-          .then((res) => console.log(res));
+          // .then((res) => {console.log(res)});
       })
       .catch((error) => setError(error.message));
   };

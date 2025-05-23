@@ -52,7 +52,7 @@ const UpdateRecipe = () => {
     // like data
     data.likeCount = 0;
 
-    fetch(`http://localhost:3000/myRecipes/${id}`, {
+    fetch(`https://recipe-book-app-eosin.vercel.app/myRecipes/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

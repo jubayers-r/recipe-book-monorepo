@@ -9,7 +9,9 @@ const MyRecipes = () => {
 
   useEffect(() => {
     if (!loading) {
-      fetch(`http://localhost:3000/myRecipes?email=${user.email}`)
+      fetch(
+        `https://recipe-book-app-eosin.vercel.app/myRecipes?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((res) => setData(res));
     }
@@ -21,7 +23,7 @@ const MyRecipes = () => {
   }
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
-      {data.length == 0 ?(
+      {data.length == 0 ? (
         <div className="space-y-10 mx-auto text-center col-span-4 mt-10">
           <p className="font-bold text-2xl">You Haven't Post any recipe yet</p>
           <Link to={"/addRecipe"}>
@@ -30,7 +32,7 @@ const MyRecipes = () => {
         </div>
       ) : (
         data.map((recipe) => <RecipeCard key={recipe._id} recipe={recipe} />)
-      ) }
+      )}
     </div>
   );
 };

@@ -22,7 +22,9 @@ const AddRecipe = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     // convert ingredients to an array
-    const ingredientsArray = data.ingredients.split(',').map(item => item.trim());
+    const ingredientsArray = data.ingredients
+      .split(",")
+      .map((item) => item.trim());
     data.ingredients = ingredientsArray;
     // add category state array instead of one checkbox
     data.category = selectedCategories;
@@ -31,7 +33,7 @@ const AddRecipe = () => {
     // like data
     data.likeCount = 0;
 
-    fetch("http://localhost:3000/recipes", {
+    fetch("https://recipe-book-app-eosin.vercel.app/recipes", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -53,7 +55,7 @@ const AddRecipe = () => {
             transition: Bounce,
           });
           form.reset();
-          navigate('/recipes')
+          navigate("/recipes");
         }
       });
   };

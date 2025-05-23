@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import { CiHeart } from "react-icons/ci";
 import { handleLikeAPI } from "../API/handleLikeAPI";
 
-
 const RecipeDetails = () => {
   const mongoId = useParams().id;
   const recipesData = useLoaderData();
@@ -38,7 +37,7 @@ const RecipeDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/myRecipes/${id}`, {
+        fetch(`https://recipe-book-app-eosin.vercel.app/myRecipes/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
