@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { CiHeart } from "react-icons/ci";
 import { handleLikeAPI } from "../API/handleLikeAPI";
+import UpdateRecipe from "./UpdateRecipe";
 
 const RecipeDetails = () => {
   const mongoId = useParams().id;
@@ -128,10 +129,22 @@ const RecipeDetails = () => {
             <div className="flex justify-center">
               <div className="flex">
                 <Link to={`/edit/${_id}`}>
-                  <button className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit">
-                    Update <FaEdit />
-                  </button>
+                  <button></button>
                 </Link>
+                {/* Open the modal using document.getElementById('ID').showModal() method */}
+                <button
+                  className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit"
+                  onClick={() =>
+                    document.getElementById("my_modal_1").showModal()
+                  }
+                >
+                  Update <FaEdit />
+                </button>
+                <dialog id="my_modal_1" className="modal">
+                  <div className="modal-box">
+                    <UpdateRecipe  />
+                  </div>
+                </dialog>
                 <button
                   onClick={() => handleDelete(_id)}
                   className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit"
