@@ -61,10 +61,10 @@ const RecipeDetails = () => {
         {likeCount} people liked this recipe
       </p>
 
-      <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%]  ">
+      <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%] ">
         <div className="flex">
-          <div className="w-[50%]  flex ">
-            <img className="rounded-lg " src={image} alt={title} />
+          <div className="w-[50%] flex">
+            <img className="rounded-lg" src={image ? image : 'https://cdn-icons-png.flaticon.com/512/3875/3875148.png'} alt={title} />
           </div>
           <div className="place-items-center mx-auto my-auto">
             <h3 className="sm:text-4xl font-semibold">{title}</h3>
@@ -104,7 +104,7 @@ const RecipeDetails = () => {
           <div className="mx-auto my-auto text-center ">
             <div className="flex justify-center">
               <div className="flex">
-                <Link to={"/edit"}>
+                <Link to={`/edit/${_id}`}>
                   <button className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit">
                     Update <FaEdit />
                   </button>

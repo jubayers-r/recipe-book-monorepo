@@ -1,28 +1,49 @@
-
-
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import { AuthContext } from "../context/authcontext/AuthContext";
+import { useLoaderData, useNavigate, useParams } from "react-router";
 
 const UpdateRecipe = () => {
+  const navigate = useNavigate();
+  const id = useParams().id;
+  const recipeData = useLoaderData();
+  const selectedRecipe = recipeData.find((data) => data._id == id);
   const { user } = use(AuthContext);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  useEffect(() => {
+    setSelectedCategories(selectedRecipe.category);
+  }, [selectedRecipe]);
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
-    if (checked) {
-      setSelectedCategories((prev) => [...prev, value]);
-    } else {
-      setSelectedCategories((prev) => prev.filter((c) => c !== value));
-    }
+
+    // interesting operation, that i dont forget the thinking way, in the future
+
+    // 1. Take the old selected list (array)
+    setSelectedCategories((prev) => {
+      // 2. Convert to a Set (to modify easily)
+      const categories = new Set(prev); //set also provides add/delete that makes operations easy
+
+      // 3. Add or remove based on checkbox interaction
+      if (checked) {
+        categories.add(value); // Set { "breakfast", "lunch", "dinner" }
+      } else {
+        categories.delete(value); // Set { "breakfast", "dinner" }
+      }
+
+      // 4. Convert back to array for state
+      return Array.from(categories); // ["breakfast", "dinner"]
+    });
   };
 
-  const handleShare = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     // convert ingredients to an array
-    const ingredientsArray = data.ingredients.split(',').map(item => item.trim());
+    const ingredientsArray = data.ingredients
+      .split(",")
+      .map((item) => item.trim());
     data.ingredients = ingredientsArray;
     // add category state array instead of one checkbox
     data.category = selectedCategories;
@@ -31,8 +52,8 @@ const UpdateRecipe = () => {
     // like data
     data.likeCount = 0;
 
-    fetch("http://localhost:3000/recipes", {
-      method: "POST",
+    fetch(`http://localhost:3000/myRecipes/${id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -40,8 +61,8 @@ const UpdateRecipe = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.acknowledged) {
-          toast.success("Posted Successfully", {
+        if (res.modifiedCount) {
+          toast.success("Post Updated Successfully", {
             position: "top-right",
             autoClose: 1500,
             hideProgressBar: true,
@@ -53,13 +74,14 @@ const UpdateRecipe = () => {
             transition: Bounce,
           });
           form.reset();
+          navigate("/myRecipes");
         }
       });
   };
 
   return (
     <div>
-      <form onSubmit={handleShare}>
+      <form onSubmit={handleUpdate}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[70%] border p-4 mx-auto">
           <legend className="fieldset-legend font-bold sm:text-lg lg:text-2xl text-center">
             Update Your Recipe
@@ -71,6 +93,7 @@ const UpdateRecipe = () => {
             className="input w-full"
             placeholder="Title"
             required
+            defaultValue={selectedRecipe.title}
           />
           <label className="label">Image URL</label>
           <input
@@ -78,6 +101,7 @@ const UpdateRecipe = () => {
             type="url"
             className="input w-full"
             placeholder="Image URL"
+            defaultValue={selectedRecipe.image}
           />
           <label className="label">Ingredients</label>
           <input
@@ -86,6 +110,7 @@ const UpdateRecipe = () => {
             className="input w-full"
             placeholder="eg. Egg, White wine, Sugar "
             required
+            defaultValue={selectedRecipe.ingredients}
           />
           <label className="label">Instructions</label>
           <textarea
@@ -93,6 +118,7 @@ const UpdateRecipe = () => {
             className="input w-full min-h-[100px] resize-y rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Instructions"
             required
+            defaultValue={selectedRecipe.instructions}
           ></textarea>
           <label className="label" htmlFor="cuisine">
             Cuisine Type
@@ -134,6 +160,7 @@ const UpdateRecipe = () => {
             type="number"
             className="input w-full"
             placeholder="eg. 10"
+            defaultValue={selectedRecipe.preparationTime}
           />
           <fieldset className="border border-gray-300 rounded-md p-4">
             <legend className="text-lg font-semibold mb-2 px-2">
@@ -147,6 +174,7 @@ const UpdateRecipe = () => {
                   id="breakfast"
                   name="category"
                   value="breakfast"
+                  checked={selectedCategories.includes("breakfast")}
                 />
                 <label htmlFor="breakfast" className="ml-2">
                   Breakfast
@@ -159,6 +187,7 @@ const UpdateRecipe = () => {
                   id="lunch"
                   name="category"
                   value="lunch"
+                  checked={selectedCategories.includes("lunch")}
                 />
                 <label htmlFor="lunch" className="ml-2">
                   Lunch
@@ -171,6 +200,7 @@ const UpdateRecipe = () => {
                   id="dinner"
                   name="category"
                   value="dinner"
+                  checked={selectedCategories.includes("dinner")}
                 />
                 <label htmlFor="dinner" className="ml-2">
                   Dinner
@@ -183,6 +213,7 @@ const UpdateRecipe = () => {
                   id="dessert"
                   name="category"
                   value="dessert"
+                  checked={selectedCategories.includes("dessert")}
                 />
                 <label htmlFor="dessert" className="ml-2">
                   Dessert
@@ -195,6 +226,7 @@ const UpdateRecipe = () => {
                   id="vegan"
                   name="category"
                   value="vegan"
+                  checked={selectedCategories.includes("vegan")}
                 />
                 <label htmlFor="vegan" className="ml-2">
                   Vegan
@@ -207,6 +239,7 @@ const UpdateRecipe = () => {
                   id="vegetarian"
                   name="category"
                   value="vegetarian"
+                  checked={selectedCategories.includes("vegetarian")}
                 />
                 <label htmlFor="vegetarian" className="ml-2">
                   Vegetarian
@@ -219,6 +252,7 @@ const UpdateRecipe = () => {
                   id="glutenFree"
                   name="category"
                   value="glutenFree"
+                  checked={selectedCategories.includes("glutenFree")}
                 />
                 <label htmlFor="glutenFree" className="ml-2">
                   Gluten-Free
@@ -231,6 +265,7 @@ const UpdateRecipe = () => {
                   id="keto"
                   name="category"
                   value="keto"
+                  checked={selectedCategories.includes("keto")}
                 />
                 <label htmlFor="keto" className="ml-2">
                   Keto
@@ -243,6 +278,7 @@ const UpdateRecipe = () => {
                   id="paleo"
                   name="category"
                   value="paleo"
+                  checked={selectedCategories.includes("paleo")}
                 />
                 <label htmlFor="paleo" className="ml-2">
                   Paleo
@@ -255,6 +291,7 @@ const UpdateRecipe = () => {
                   id="snacks"
                   name="category"
                   value="snacks"
+                  checked={selectedCategories.includes("snacks")}
                 />
                 <label htmlFor="snacks" className="ml-2">
                   Snacks
@@ -267,6 +304,7 @@ const UpdateRecipe = () => {
                   id="drinks"
                   name="category"
                   value="drinks"
+                  checked={selectedCategories.includes("drinks")}
                 />
                 <label htmlFor="drinks" className="ml-2">
                   Drinks
@@ -279,6 +317,7 @@ const UpdateRecipe = () => {
                   id="appetizer"
                   name="category"
                   value="appetizer"
+                  checked={selectedCategories.includes("appetizer")}
                 />
                 <label htmlFor="appetizer" className="ml-2">
                   Appetizer
@@ -291,6 +330,7 @@ const UpdateRecipe = () => {
                   id="soup"
                   name="category"
                   value="soup"
+                  checked={selectedCategories.includes("soup")}
                 />
                 <label htmlFor="soup" className="ml-2">
                   Soup
@@ -303,6 +343,7 @@ const UpdateRecipe = () => {
                   id="salad"
                   name="category"
                   value="salad"
+                  checked={selectedCategories.includes("salad")}
                 />
                 <label htmlFor="salad" className="ml-2">
                   Salad
@@ -315,6 +356,7 @@ const UpdateRecipe = () => {
                   id="bbq"
                   name="category"
                   value="bbq"
+                  checked={selectedCategories.includes("bbq")}
                 />
                 <label htmlFor="bbq" className="ml-2">
                   BBQ
@@ -327,6 +369,7 @@ const UpdateRecipe = () => {
                   id="holiday"
                   name="category"
                   value="holiday"
+                  checked={selectedCategories.includes("holiday")}
                 />
                 <label htmlFor="holiday" className="ml-2">
                   Holiday Special

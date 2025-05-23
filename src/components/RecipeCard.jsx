@@ -14,7 +14,7 @@ const RecipeCard = ({ recipe }) => {
     preparationTime,
     category,
     likeCount,
-    _id
+    _id,
   } = recipe;
   // truncation function for show more ux
   const maxWords = 12;
@@ -26,19 +26,30 @@ const RecipeCard = ({ recipe }) => {
   return (
     <div className="card bg-base-100 shadow-sm">
       <figure className="w-full h-50">
-        <img src={image} alt={title} className=" object-cover" />
+        <img
+          src={
+            image
+              ? image
+              : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png"
+          }
+          alt={title}
+          className=" object-cover"
+        />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
           {title}
           <div className="badge badge-secondary">{cuisineType}</div>
         </h2>
-        <div className="card-actions justify-end">
-        {category.map((category, index) => (
-                <p key={index} className="font-semibold border p-1 rounded-lg hover:bg-green-600 hover:text-white text-center">
-                  {category}
-                </p>
-              ))}
+        <div className="card-actions justify-end grid grid-cols-3 sm:grid-cols-4">
+          {category.map((category, index) => (
+            <p
+              key={index}
+              className="font-semibold border p-1 rounded-lg hover:bg-green-600 hover:text-white text-center"
+            >
+              {category}
+            </p>
+          ))}
         </div>
         <p>{truncatedInstructions}</p>
       </div>
