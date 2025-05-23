@@ -20,6 +20,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: () => fetch("https://recipe-book-app-eosin.vercel.app/topRecipes"),
       },
       {
         path: "signin",
