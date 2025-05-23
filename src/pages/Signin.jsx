@@ -5,8 +5,15 @@ import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 
 const Signin = () => {
-  const { signin, googleLogin, error, stateData, setError, setUser } =
-    use(AuthContext);
+  const {
+    signin,
+    googleLogin,
+    error,
+    stateData,
+    setError,
+    setUser,
+    forgotPassword,
+  } = use(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleSignin = (e) => {
@@ -14,39 +21,60 @@ const Signin = () => {
     const form = e.target;
     const formData = new FormData(form);
     const { email, password } = Object.fromEntries(formData.entries());
-    signin(email, password)
-      .then((res) => {
-        setUser(res.user);
-        const authInfo = {
-          email,
-          lastSignInTime: res.user?.metadata?.lastSignInTime,
-        };
-        fetch("https://recipe-book-app-eosin.vercel.app/users", {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(authInfo),
+    const action = e.nativeEvent.submitter.value;
+
+    if (action === "signin") {
+      // handle login
+      signin(email, password)
+        .then((res) => {
+          setUser(res.user);
+          const authInfo = {
+            email,
+            lastSignInTime: res.user?.metadata?.lastSignInTime,
+          };
+          fetch("https://recipe-book-app-eosin.vercel.app/users", {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(authInfo),
+          })
+            .then((res) => res.json())
+            .then(() => {
+              navigate(stateData ? stateData : "/");
+            });
         })
-          .then((res) => res.json())
-          .then(() => {
-            navigate(stateData ? stateData : "/");
-          });
-      })
-      .catch((error) => setError(error.message));
+        .catch((error) => setError(error.message));
+    } else if (action === "reset") {
+      forgotPassword(email)
+        .then(() => {
+          setError(`Password reset email sent!`);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    }
   };
+
   const errorMessages = {
     "Firebase: Error (auth/invalid-credential).": {
       title: "Wrong credentials",
       message: "Invalid email or password",
+      type: "error",
     },
     "Firebase: Error (auth/missing-password).": {
       title: "Wrong credentials",
       message: "Invalid email or password",
+      type: "error",
     },
     "Firebase: Error (auth/invalid-email).": {
       title: "Wrong credentials",
       message: "Invalid email",
+      type: "error",
+    },
+    "Password reset email sent!": {
+      message: "Password reset email sent!",
+      type: "success",
     },
   };
   const errorData = errorMessages[error];
@@ -73,7 +101,6 @@ const Signin = () => {
               type={show ? "text" : "password"}
               className="input"
               placeholder="Password"
-              required
             />
             <div
               onClick={(e) => {
@@ -86,8 +113,15 @@ const Signin = () => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-neutral mt-4">
-            Login
+          <button value="signin" type="submit" className="btn btn-neutral mt-4">
+            Sign in
+          </button>
+          <button type="submit" value="reset" className="">
+            Forgotten password?{" "}
+            <span className="hover:border-b hover:text-[#00684a]">
+              {" "}
+              Reset Password
+            </span>
           </button>
           <button
             onClick={() =>
@@ -101,14 +135,20 @@ const Signin = () => {
             Sign In With Google
           </button>
 
-           <p className="text-center">
+          <p className="text-center">
             Not Registered Yet?{" "}
             <span className="hover:border-b hover:text-[#00684a]">
               <Link to={"/signup"}>Sign Up Now</Link>
             </span>
           </p>
           {errorData && (
-            <div className="p-2 border text-center rounded-sm bg-red-100 border-red-600">
+            <div
+              className={`p-2 border text-center rounded-sm ${
+                errorData.type === "error"
+                  ? "bg-red-100 border-red-600"
+                  : "bg-green-100 border-green-600"
+              }`}
+            >
               {errorData.title && (
                 <p className="text-sm font-bold">{errorData.title}</p>
               )}
