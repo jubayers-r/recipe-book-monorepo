@@ -1,10 +1,11 @@
-import React, { use } from "react";
+import React, { useState } from "react";
 import { useLoaderData, useParams } from "react-router";
-import { AuthContext } from "../context/authcontext/AuthContext";
-import { CgProfile } from "react-icons/cg";
 import { FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { CiHeart } from "react-icons/ci";
+import { handleLikeAPI } from "../API/handleLikeAPI";
+
 
 const RecipeDetails = () => {
   const mongoId = useParams().id;
@@ -55,16 +56,31 @@ const RecipeDetails = () => {
     });
   };
 
+  const [like, setLike] = useState(likeCount);
+  const handleLike = () => {
+    handleLikeAPI(_id, like, email).then(
+      (res) => res == "Approved" && setLike(like + 1)
+    );
+  };
+
   return (
     <div>
       <p className="text-2xl font-semibold p-7 text-center">
-        {likeCount} people liked this recipe
+        {like} people are interested in this recipe
       </p>
 
       <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%] ">
         <div className="flex">
           <div className="w-[50%] flex">
-            <img className="rounded-lg" src={image ? image : 'https://cdn-icons-png.flaticon.com/512/3875/3875148.png'} alt={title} />
+            <img
+              className="rounded-lg"
+              src={
+                image
+                  ? image
+                  : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png"
+              }
+              alt={title}
+            />
           </div>
           <div className="place-items-center mx-auto my-auto">
             <h3 className="sm:text-4xl font-semibold">{title}</h3>
@@ -78,6 +94,9 @@ const RecipeDetails = () => {
                   {category}
                 </p>
               ))}
+            </div>
+            <div className="btn " onClick={handleLike}>
+              <CiHeart size={25} /> {like}
             </div>
           </div>
         </div>
@@ -99,7 +118,12 @@ const RecipeDetails = () => {
             {preparationTime ? ` ${preparationTime} Minutes` : "Not Provided"}{" "}
           </span>
         </p>
-        <p className="text-xl"><span className="font-bold border-b-1">Here the instruction goes:</span> {instructions}</p>
+        <p className="text-xl">
+          <span className="font-bold border-b-1">
+            Here the instruction goes:
+          </span>{" "}
+          {instructions}
+        </p>
         {email && (
           <div className="mx-auto my-auto text-center ">
             <div className="flex justify-center">

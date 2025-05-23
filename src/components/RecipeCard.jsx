@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { LiaComments } from "react-icons/lia";
-import { FaShareAlt } from "react-icons/fa";
 import { Link } from "react-router";
+import { handleLikeAPI } from "../API/handleLikeAPI";
 
 const RecipeCard = ({ recipe }) => {
   const {
     image,
     title,
-    ingredients,
     instructions,
     cuisineType,
-    preparationTime,
     category,
     likeCount,
     _id,
+    email,
   } = recipe;
   // truncation function for show more ux
   const maxWords = 12;
@@ -22,6 +21,13 @@ const RecipeCard = ({ recipe }) => {
     ? instructions.split(" ").slice(0, maxWords).join(" ") +
       (instructions.split(" ").length > maxWords ? "..." : "")
     : "No instructions provided.";
+
+  const [like, setLike] = useState(likeCount);
+  const handleLike = () => {
+    handleLikeAPI(_id, like, email).then(
+      (res) => res == "Approved" && setLike(like + 1)
+    );
+  };
 
   return (
     <div className="card bg-base-100 shadow-sm">
@@ -54,8 +60,8 @@ const RecipeCard = ({ recipe }) => {
         <p>{truncatedInstructions}</p>
       </div>
       <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
-        <div className="btn ">
-          <CiHeart size={25} /> {likeCount}
+        <div className="btn " onClick={handleLike}>
+          <CiHeart size={25} /> {like}
         </div>
         <div className="btn ">
           <LiaComments size={25} /> Discussion
