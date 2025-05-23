@@ -9,6 +9,7 @@ import RecipeDetails from "../pages/RecipeDetails";
 import MyRecipes from "../pages/MyRecipes";
 import UpdateRecipe from "../pages/UpdateRecipe";
 import PrivetRoute from "./PrivetRoute";
+import Home from "../pages/Home";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
     Component: MainLayout,
     errorElement: <Error />,
     children: [
+      {
+        index: true,
+        Component: Home,
+      },
       {
         path: "signin",
         Component: Signin,

@@ -4,6 +4,8 @@ import Footer from "./Footer";
 import { Outlet } from "react-router";
 // import { Outlet, useLocation } from "react-router";
 import { ToastContainer } from "react-toastify";
+import Home from "../pages/Home";
+import Hero from "../components/Hero";
 
 const MainLayout = () => {
 //   const location = useLocation();
@@ -25,6 +27,7 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col ">
       <Navbar />
+      <Hero/>
       <hr className="text-gray-200" />
       <main className="flex-grow flex flex-col justify-center mb-15 mt-4 w-9/11 mx-auto">
         <Outlet />
