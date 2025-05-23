@@ -1,8 +1,6 @@
-import React, { useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { LiaComments } from "react-icons/lia";
 import { Link } from "react-router";
-import { handleLikeAPI } from "../API/handleLikeAPI";
 
 const RecipeCard = ({ recipe }) => {
   const {
@@ -13,7 +11,7 @@ const RecipeCard = ({ recipe }) => {
     category,
     likeCount,
     _id,
-    email,
+
   } = recipe;
   // truncation function for show more ux
   const maxWords = 12;
@@ -22,12 +20,8 @@ const RecipeCard = ({ recipe }) => {
       (instructions.split(" ").length > maxWords ? "..." : "")
     : "No instructions provided.";
 
-  const [like, setLike] = useState(likeCount);
-  const handleLike = () => {
-    handleLikeAPI(_id, like, email).then(
-      (res) => res == "Approved" && setLike(like + 1)
-    );
-  };
+
+
 
   return (
     <div className="card bg-base-100 shadow-sm">
@@ -47,7 +41,7 @@ const RecipeCard = ({ recipe }) => {
           {title}
           <div className="badge badge-secondary">{cuisineType}</div>
         </h2>
-        <div className="card-actions justify-end grid grid-cols-3 sm:grid-cols-4">
+        <div className="card-actions justify-end grid grid-cols-2 2xl:grid-cols-3">
           {category.map((category, index) => (
             <p
               key={index}
@@ -60,8 +54,8 @@ const RecipeCard = ({ recipe }) => {
         <p>{truncatedInstructions}</p>
       </div>
       <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
-        <div className="btn " onClick={handleLike}>
-          <CiHeart size={25} /> {like}
+        <div className="btn" >
+          <CiHeart size={25} /> {likeCount}
         </div>
         <div className="btn ">
           <LiaComments size={25} /> Discussion

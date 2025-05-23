@@ -1,15 +1,14 @@
-import React, { use, useEffect, useState } from "react";
+import React, { use, useState } from "react";
 import { AuthContext } from "../context/authcontext/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 
 const Signin = () => {
-  const { signin, googleLogin, error, stateData, setError, setUser, user } =
+  const { signin, googleLogin, error, stateData, setError, setUser } =
     use(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const location = useLocation();
   const handleSignin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -30,7 +29,9 @@ const Signin = () => {
           body: JSON.stringify(authInfo),
         })
           .then((res) => res.json())
-          // .then((res) => {console.log(res)});
+          .then(() => {
+            navigate(stateData ? stateData : "/");
+          });
       })
       .catch((error) => setError(error.message));
   };
@@ -49,9 +50,7 @@ const Signin = () => {
     },
   };
   const errorData = errorMessages[error];
-  useEffect(() => {
-    setError(null);
-  }, [location.pathname]);
+
   return (
     <div>
       <form onSubmit={handleSignin}>
@@ -101,6 +100,13 @@ const Signin = () => {
             <FcGoogle size={20} />
             Sign In With Google
           </button>
+
+           <p className="text-center">
+            Not Registered Yet?{" "}
+            <span className="hover:border-b hover:text-[#00684a]">
+              <Link to={"/signup"}>Sign Up Now</Link>
+            </span>
+          </p>
           {errorData && (
             <div className="p-2 border text-center rounded-sm bg-red-100 border-red-600">
               {errorData.title && (

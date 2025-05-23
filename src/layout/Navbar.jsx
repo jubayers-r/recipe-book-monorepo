@@ -59,10 +59,12 @@ const Navbar = () => {
           </div>
           <Link to={"/"} className="text-xl">
             <div className="flex gap-2 items-center justify-center">
-              <div className="sm:w-20 w-10">
-              </div>
+              <div className="sm:w-20 w-10"></div>
               <div className="w-15 hidden sm:block">
-              <img src='https://www.svgrepo.com/show/383674/menu-food-fork.svg' alt="" />
+                <img
+                  src="https://www.svgrepo.com/show/383674/menu-food-fork.svg"
+                  alt=""
+                />
               </div>
 
               <h3 className="text-xl sm:text-3xl lg:text-3xl font-semibold font-[Poetsen_One]">
@@ -110,35 +112,32 @@ const Navbar = () => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 min-w-80 max-w-screen p-2 shadow"
                 >
-                  {" "}
-                  <Link to={"/profile"}>
-                    <div className="flex rounded-lg gap-2 p-2 items-center mb-2 hover:bg-gray-200">
-                      <div className="w-10 sm:w-12 h-10 sm:h-12">
-                        {!user.photoURL ? (
-                          <CgProfile className="rounded-full object-cover w-full h-full" />
-                        ) : (
-                          <img
-                            className="rounded-full object-cover w-full h-full"
-                            src={user.photoURL}
-                            alt="avatar"
-                          />
-                        )}
-                      </div>
-                      <div>
-                        <p className="font-semibold text-xl">
-                          {user.displayName}
-                        </p>
-                        <p className=" text-lg">{user.email}</p>
-                      </div>
+                  <div className="flex rounded-lg gap-2 p-2 items-center mb-2 hover:bg-gray-200">
+                    <div className="w-10 sm:w-12 h-10 sm:h-12">
+                      {!user.photoURL ? (
+                        <CgProfile className="rounded-full object-cover w-full h-full" />
+                      ) : (
+                        <img
+                          className="rounded-full object-cover w-full h-full"
+                          src={user.photoURL}
+                          alt="avatar"
+                        />
+                      )}
                     </div>
-                  </Link>
+                    <div>
+                      <p className="font-semibold text-xl">
+                        {user.displayName}
+                      </p>
+                      <p className=" text-lg">{user.email}</p>
+                    </div>
+                  </div>
                   <hr className="text-gray-300" />
                   <button
                     onClick={() => logout()}
                     className="lg:text-lg font-semibold hover:bg-gray-200 rounded-lg gap-2 p-2 flex items-center "
                   >
                     <IoLogOutOutline size={25} />
-                    Logout
+                    Sign Out
                   </button>
                 </ul>
               </div>

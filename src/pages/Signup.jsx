@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/authcontext/AuthContext";
 import { FcGoogle } from "react-icons/fc";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
@@ -56,7 +56,7 @@ const Signup = () => {
               .then((res) => res.json())
               .then(() => {
                 setUser(user);
-                setError(null);
+                navigate(stateData ? stateData : "/");
               });
           });
         })
@@ -140,6 +140,12 @@ const Signup = () => {
             <FcGoogle size={20} />
             Sign Up With Google
           </button>
+          <p className="text-center">
+            Already Registered?{" "}
+            <span className="hover:border-b hover:text-[#00684a]">
+              <Link to={"/signin"}>Sign In</Link>
+            </span>
+          </p>
           {error && (
             <div className="w-full text-center">
               <p className="p-2 border text-center rounded-sm bg-red-100 border-red-600">

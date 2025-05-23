@@ -8,6 +8,7 @@ import AllRecipes from "../pages/AllRecipes";
 import RecipeDetails from "../pages/RecipeDetails";
 import MyRecipes from "../pages/MyRecipes";
 import UpdateRecipe from "../pages/UpdateRecipe";
+import PrivetRoute from "./PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "addRecipe",
-        Component: AddRecipe,
+        element: <PrivetRoute><AddRecipe/></PrivetRoute> ,
       },
       {
         path: "recipes",
@@ -34,16 +35,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "recipeDetails/:id",
-        Component: RecipeDetails,
+        element: <PrivetRoute><RecipeDetails/></PrivetRoute>,
         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
       },
       {
         path: "myRecipes",
-        Component: MyRecipes,
+        element: <PrivetRoute><MyRecipes/></PrivetRoute>,
+
       },
       {
         path: "edit/:id",
-        Component: UpdateRecipe,
+        element: <PrivetRoute><UpdateRecipe/></PrivetRoute>,
         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
       },
     ],
