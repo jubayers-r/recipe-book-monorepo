@@ -13,8 +13,8 @@ const AllRecipes = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col sm:flex-row  w-full mx-auto justify-between items-center">
+    <div className="w-9/11 mx-auto">
+      <div className="flex flex-col sm:flex-row justify-between items-center ">
         <h3 className="text-3xl font-bold text-center my-5">
           Taste Your Buds Out
         </h3>
@@ -34,7 +34,7 @@ const AllRecipes = () => {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
         {type == "Default"
           ? recipesData.map((recipe) => (
               <RecipeCard key={recipe._id} recipe={recipe} />
@@ -45,7 +45,7 @@ const AllRecipes = () => {
                 <RecipeCard key={index} recipe={recipe} />
               ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const TopRecipes = ({ topRecipes }) => {
   return (
-    <div>
+    <div className="w-9/11 mx-auto">
       <h1 className="text-4xl font-bold text-center my-5">Top Recipes</h1>
       <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-5">
         {topRecipes.map((recipe) => (

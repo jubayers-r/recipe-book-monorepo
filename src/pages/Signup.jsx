@@ -132,7 +132,7 @@ const Signup = () => {
           <button
             onClick={() =>
               googleLogin().then(() =>
-                navigate(stateData ? `${stateData}` : "/")
+                navigate("/")
               )
             }
             className="btn hover:border hover:border-black flex gap-2"

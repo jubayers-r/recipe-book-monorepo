@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Banner = () => {
   return (
-    <section className="bg-gray-900 text-white py-16 px-6 md:px-12 lg:px-24 my-20 rounded-4xl">
+    <section className="bg-gray-900 text-white py-16 px-6 md:px-12 lg:px-24 my-20 rounded-4xl w-9/11 mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Text Block */}
         <div>

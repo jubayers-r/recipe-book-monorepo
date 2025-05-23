@@ -3,25 +3,14 @@ import { LiaComments } from "react-icons/lia";
 import { Link } from "react-router";
 
 const RecipeCard = ({ recipe }) => {
-  const {
-    image,
-    title,
-    instructions,
-    cuisineType,
-    category,
-    likeCount,
-    _id,
-
-  } = recipe;
+  const { image, title, instructions, cuisineType, category, likeCount, _id } =
+    recipe;
   // truncation function for show more ux
   const maxWords = 12;
   const truncatedInstructions = instructions
     ? instructions.split(" ").slice(0, maxWords).join(" ") +
       (instructions.split(" ").length > maxWords ? "..." : "")
     : "No instructions provided.";
-
-
-
 
   return (
     <div className="card bg-base-100 shadow-sm">
@@ -37,10 +26,10 @@ const RecipeCard = ({ recipe }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">
-          {title}
-          <div className="badge badge-secondary">{cuisineType}</div>
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:gap-5 gap-2 items-center">
+          <h2 className="card-title">{title}</h2>
+          <div className="badge badge-secondary ">{cuisineType}</div>
+        </div>
         <div className="card-actions justify-end grid grid-cols-2 2xl:grid-cols-3">
           {category.map((category, index) => (
             <p
@@ -54,7 +43,7 @@ const RecipeCard = ({ recipe }) => {
         <p>{truncatedInstructions}</p>
       </div>
       <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
-        <div className="btn" >
+        <div className="btn">
           <CiHeart size={25} /> {likeCount}
         </div>
         <div className="btn ">

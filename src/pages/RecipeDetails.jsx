@@ -64,13 +64,13 @@ const RecipeDetails = () => {
 
   return (
     <div>
-      <p className="text-2xl font-semibold p-7 text-center">
+      <p className="text-2xl font-semibold p-7 text-center ">
         {like} people are interested in this recipe
       </p>
 
       <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%] ">
-        <div className="flex">
-          <div className="w-[50%] flex">
+        <div className="flex flex-col md:flex-row ">
+          <div className="w-full md:w-[50%]">
             <img
               className="rounded-lg"
               src={
@@ -100,8 +100,8 @@ const RecipeDetails = () => {
           </div>
         </div>
 
-        <div className="flex gap-2 font-black mt-5 mb-2 items-center ">
-          <span className="border-b-1">Ingredients:</span>
+        <div className="grid sm:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-9 gap-2 font-black mt-5 mb-2 items-center text-center">
+          <h3 className="border-b-1 w-fit">Ingredients:</h3>
           {ingredients.map((ingredient, index) => (
             <p
               key={index}
