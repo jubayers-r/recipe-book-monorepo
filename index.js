@@ -44,6 +44,12 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/recipes", async (req, res) => {
+      const recipeDetails = req.body;
+      const result = await RecipeDB.insertOne(recipeDetails);
+      res.send(result);
+    });
+
     app.delete("/myRecipes/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -51,15 +57,21 @@ async function run() {
       res.send(result);
     });
 
-    app.post("/recipes", async (req, res) => {
-      const recipeDetails = req.body;
-      const result = await RecipeDB.insertOne(recipeDetails);
-      res.send(result);
-    });
     // user related apis
     app.post("/users", async (req, res) => {
       const userProfile = req.body;
       const result = await UsersDB.insertOne(userProfile);
+      res.send(result);
+    });
+    app.patch("/users", async (req, res) => {
+      const {email, lastSignInTime} = req.body;
+      const filter = {email: email};
+      const updatedDoc =  {
+        $set: {
+          lastSignInTime: lastSignInTime
+        }
+      }
+      const result = await UsersDB.updateOne(filter, updatedDoc);
       res.send(result);
     });
 
