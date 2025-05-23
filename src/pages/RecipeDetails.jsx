@@ -82,8 +82,8 @@ const RecipeDetails = () => {
           </div>
         </div>
 
-        <div className="flex gap-2 font-black mt-5 mb-2 items-center">
-          Ingredients:
+        <div className="flex gap-2 font-black mt-5 mb-2 items-center ">
+          <span className="border-b-1">Ingredients:</span>
           {ingredients.map((ingredient, index) => (
             <p
               key={index}
@@ -94,12 +94,12 @@ const RecipeDetails = () => {
           ))}
         </div>
         <p className="font-bold">
-          Estimated making time:
+          <span className="border-b-1"> Estimated making time:</span>
           <span className="font-medium">
-            {preparationTime ? `${preparationTime} Minutes` : "Not Provided"}{" "}
+            {preparationTime ? ` ${preparationTime} Minutes` : "Not Provided"}{" "}
           </span>
         </p>
-        <p className="text-2xl">{instructions}</p>
+        <p className="text-xl"><span className="font-bold border-b-1">Here the instruction goes:</span> {instructions}</p>
         {email && (
           <div className="mx-auto my-auto text-center ">
             <div className="flex justify-center">
