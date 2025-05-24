@@ -11,7 +11,7 @@ const PrivetRoute = ({children}) => {
     },[])
 
     if(loading){
-        return <span className="loading loading-dots loading-xl mx-auto"/>
+        return <span className="loading loading-dots loading-xl mx-auto dark:text-white"/>
     }
 
     if (!user){

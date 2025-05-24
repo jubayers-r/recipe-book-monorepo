@@ -77,8 +77,8 @@ const Signup = () => {
   return (
     <div>
       <form onSubmit={handleSignup}>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto">
-          <legend className="fieldset-legend text-2xl font-bold">SignUp</legend>
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto dark:bg-slate-600 dark:text-white">
+          <legend className="fieldset-legend text-2xl font-bold dark:text-white">SignUp</legend>
 
           <label className="label">Name</label>
           <input
@@ -142,7 +142,7 @@ const Signup = () => {
           </button>
           <p className="text-center">
             Already Registered?{" "}
-            <span className="hover:border-b hover:text-[#00684a]">
+            <span className="hover:border-b hover:text-[#00684a] dark:hover:text-[#a6ffa6]">
               <Link to={"/signin"}>Sign In</Link>
             </span>
           </p>

@@ -83,7 +83,7 @@ const UpdateRecipe = () => {
   return (
     <div>
       <form onSubmit={handleUpdate}>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[70%] border p-4 mx-auto">
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[70%] border p-4 mx-auto dark:bg-slate-600 dark:text-white">
           <legend className="fieldset-legend font-bold sm:text-lg lg:text-2xl text-center">
             Update Your Recipe
           </legend>

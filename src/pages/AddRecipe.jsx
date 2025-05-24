@@ -63,8 +63,8 @@ const AddRecipe = () => {
   return (
     <div>
       <form onSubmit={handleShare}>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[70%] border p-4 mx-auto">
-          <legend className="fieldset-legend font-bold sm:text-lg lg:text-2xl text-center">
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[70%] border p-4 mx-auto dark:bg-slate-600 dark:text-white">
+          <legend className="fieldset-legend font-bold sm:text-lg lg:text-2xl text-center dark:text-white">
             Share Your Recipe to the World
           </legend>
           <label className="label">Title</label>

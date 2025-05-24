@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLoaderData, useParams } from "react-router";
 import { FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
@@ -8,6 +8,26 @@ import { handleLikeAPI } from "../API/handleLikeAPI";
 import UpdateRecipe from "./UpdateRecipe";
 
 const RecipeDetails = () => {
+// dark mode
+
+const [isDarkMode, setIsDarkMode] = useState(false);
+
+useEffect(() => {
+  // Check initially if 'dark' class exists
+  setIsDarkMode(document.documentElement.classList.contains('dark'));
+
+  // Optional: observe changes to html classList (if you toggle dark mode dynamically)
+  const observer = new MutationObserver(() => {
+    setIsDarkMode(document.documentElement.classList.contains('dark'));
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  return () => observer.disconnect();
+}, []);
+
+// dark mode
+
+
   const mongoId = useParams().id;
   const recipesData = useLoaderData();
 
@@ -64,7 +84,7 @@ const RecipeDetails = () => {
   };
 
   return (
-    <div>
+    <div className="dark:text-white">
       <p className="text-2xl font-semibold p-7 text-center ">
         {like} people are interested in this recipe
       </p>
@@ -72,15 +92,17 @@ const RecipeDetails = () => {
       <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%] ">
         <div className="flex flex-col md:flex-row ">
           <div className="w-full md:w-[50%]">
-            <img
-              className="rounded-lg"
-              src={
-                image
-                  ? image
-                  : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png"
-              }
-              alt={title}
-            />
+          <img
+  className="rounded-lg"
+  src={
+    image
+      ? image
+      : isDarkMode
+      ? "https://cdn-icons-png.flaticon.com/512/3875/3875172.png" // dark mode fallback image
+      : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png" // light mode fallback image
+  }
+  alt={title}
+/>
           </div>
           <div className="place-items-center mx-auto my-auto">
             <h3 className="sm:text-4xl font-semibold">{title}</h3>

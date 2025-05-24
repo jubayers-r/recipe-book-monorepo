@@ -5,8 +5,8 @@ const FAQ = () => {
   return (
     <div>
       <div className="text-center my-10">
-        <h3 className="text-green-600 font-[Handlee] text-2xl">FAQ</h3>
-        <h3 className="text-xl sm:text-2xl md:text-4xl font-bold">
+        <h3 className="text-green-600 font-[Handlee] text-2xl dark:text-emerald-400">FAQ</h3>
+        <h3 className="text-xl sm:text-2xl md:text-4xl font-bold dark:text-white">
           Frequently Asked Questions
         </h3>
       </div>

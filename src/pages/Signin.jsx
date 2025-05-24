@@ -82,8 +82,8 @@ const Signin = () => {
   return (
     <div>
       <form onSubmit={handleSignin}>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto">
-          <legend className="fieldset-legend text-2xl font-bold">SignIn</legend>
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto dark:bg-slate-600 dark:text-white">
+          <legend className="fieldset-legend text-2xl font-bold dark:text-white">SignIn</legend>
 
           <label className="label">Email</label>
           <input
@@ -146,7 +146,7 @@ const Signin = () => {
               className={`p-2 border text-center rounded-sm ${
                 errorData.type === "error"
                   ? "bg-red-100 border-red-600"
-                  : "bg-green-100 border-green-600"
+                  : "bg-green-100 border-green-600 dark:hover:text-[#a6ffa6]"
               }`}
             >
               {errorData.title && (

@@ -13,7 +13,7 @@ const RecipeCard = ({ recipe }) => {
     : "No instructions provided.";
 
   return (
-    <div className="card bg-base-100 shadow-sm">
+    <div className="card bg-base-100 shadow-sm ">
       <figure className="w-full h-50">
         <img
           src={

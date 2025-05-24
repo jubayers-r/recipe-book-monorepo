@@ -8,6 +8,8 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { IoLogOutOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { AuthContext } from "../context/authcontext/AuthContext";
+import DarkModeToggle from "../context/themeContext/DarkModeToggle";
+
 
 const navLinks = (
   <>
@@ -66,7 +68,6 @@ const Navbar = () => {
                   alt=""
                 />
               </div>
-
               <h3 className="text-xl sm:text-3xl lg:text-3xl font-semibold font-[Poetsen_One]">
                 TasteScript
               </h3>
@@ -76,10 +77,12 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-5  text-xl">
             {navLinks}
+
           </ul>
         </div>
 
-        <div className="navbar-end gap-2 ">
+        <div className="navbar-end gap-7 ">
+        <DarkModeToggle />
           {loading ? (
             <span className="loading loading-bars loading-xl " />
           ) : user ? (
