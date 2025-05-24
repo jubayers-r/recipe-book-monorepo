@@ -83,13 +83,16 @@ const Signin = () => {
     <div>
       <form onSubmit={handleSignin}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto dark:bg-slate-600 dark:text-white">
-          <legend className="fieldset-legend text-2xl font-bold dark:text-white">SignIn</legend>
+          <legend className="fieldset-legend text-2xl font-bold dark:text-white">
+            SignIn
+          </legend>
 
           <label className="label">Email</label>
           <input
+            dark:text-black
             name="email"
             type="email"
-            className="input"
+            className="input dark:text-black"
             placeholder="Email"
             required
           />
@@ -97,9 +100,10 @@ const Signin = () => {
           <div className="relative">
             <label className="label ">Password</label>
             <input
+              dark:text-black
               name="password"
               type={show ? "text" : "password"}
-              className="input"
+              className="input dark:text-black"
               placeholder="Password"
             />
             <div
@@ -109,16 +113,24 @@ const Signin = () => {
               }}
               className="absolute bottom-3 right-5 z-1"
             >
-              {show ? <FaEyeSlash /> : <FaEye />}
+              {show ? (
+                <FaEyeSlash className="dark:text-black" />
+              ) : (
+                <FaEye className="dark:text-black" />
+              )}
             </div>
           </div>
 
-          <button value="signin" type="submit" className="btn btn-neutral mt-4">
+          <button
+            value="signin"
+            type="submit"
+            className="btn btn-neutral mt-4 "
+          >
             Sign in
           </button>
           <button type="submit" value="reset" className="">
             Forgotten password?{" "}
-            <span className="hover:border-b hover:text-[#00684a]">
+            <span className="hover:border-b hover:text-[#00684a] dark:hover:text-[#a6ffa6]">
               {" "}
               Reset Password
             </span>
@@ -137,7 +149,7 @@ const Signin = () => {
 
           <p className="text-center">
             Not Registered Yet?{" "}
-            <span className="hover:border-b hover:text-[#00684a]">
+            <span className="hover:border-b hover:text-[#00684a] dark:hover:text-[#a6ffa6]">
               <Link to={"/signup"}>Sign Up Now</Link>
             </span>
           </p>
@@ -145,7 +157,7 @@ const Signin = () => {
             <div
               className={`p-2 border text-center rounded-sm ${
                 errorData.type === "error"
-                  ? "bg-red-100 border-red-600"
+                  ? "bg-red-100 border-red-600 dark:bg-red-500 dark:border-white"
                   : "bg-green-100 border-green-600 dark:hover:text-[#a6ffa6]"
               }`}
             >

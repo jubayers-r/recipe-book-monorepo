@@ -10,7 +10,7 @@ const FAQ = () => {
           Frequently Asked Questions
         </h3>
       </div>
-      <div className="grid gap-3 lg:w-[70%] mx-auto my-10">
+      <div className="grid gap-3 w-9/11 lg:w-[70%] mx-auto my-10">
         <Accordion
           Q={"How do I create an account?"}
           A={

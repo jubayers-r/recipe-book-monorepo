@@ -22,7 +22,9 @@ const MyRecipes = () => {
     );
   }
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-9/11 mx-auto">
+    <div className=" w-9/11 mx-auto">
+      <h3 className="dark:text-white text-2xl sm:text-3xl my-5 text-center font-bold">My Posts</h3>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {data.length == 0 ? (
         <div className="space-y-10 mx-auto text-center col-span-4 mt-10">
           <p className="font-bold text-2xl dark:text-white">You Haven't Post any recipe yet</p>
@@ -33,6 +35,7 @@ const MyRecipes = () => {
       ) : (
         data.map((recipe) => <RecipeCard key={recipe._id} recipe={recipe} />)
       )}
+      </div>
     </div>
   );
 };

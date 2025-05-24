@@ -78,40 +78,46 @@ const Signup = () => {
     <div>
       <form onSubmit={handleSignup}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto dark:bg-slate-600 dark:text-white">
-          <legend className="fieldset-legend text-2xl font-bold dark:text-white">SignUp</legend>
+          <legend className="fieldset-legend text-2xl font-bold dark:text-white">
+            SignUp
+          </legend>
 
           <label className="label">Name</label>
           <input
+            dark:text-black
             name="name"
             type="text"
-            className="input"
+            className="input dark:text-black"
             placeholder="Name"
             required
           />
 
           <label className="label">Email</label>
           <input
+            dark:text-black
             name="email"
             type="email"
-            className="input"
+            className="input dark:text-black"
             placeholder="Email"
             required
           />
 
           <label className="label">PhotoURL</label>
           <input
+            dark:text-black
             name="url"
             type="url"
-            className="input"
+            className="input dark:text-black"
             placeholder="PhotoURL"
           />
 
           <div className="relative">
             <label className="label ">Password</label>
             <input
+              dark:text-black
               name="password"
               type={show ? "text" : "password"}
-              className="input"
+              className="input dark:text-black"
               placeholder="Password"
               required
             />
@@ -122,7 +128,11 @@ const Signup = () => {
               }}
               className="absolute bottom-3 right-5 z-1"
             >
-              {show ? <FaEyeSlash /> : <FaEye />}
+              {show ? (
+                <FaEyeSlash className="dark:text-black" />
+              ) : (
+                <FaEye className="dark:text-black" />
+              )}
             </div>
           </div>
 
@@ -130,11 +140,7 @@ const Signup = () => {
             Sign Up
           </button>
           <button
-            onClick={() =>
-              googleLogin().then(() =>
-                navigate("/")
-              )
-            }
+            onClick={() => googleLogin().then(() => navigate("/"))}
             className="btn hover:border hover:border-black flex gap-2"
           >
             <FcGoogle size={20} />
@@ -148,7 +154,7 @@ const Signup = () => {
           </p>
           {error && (
             <div className="w-full text-center">
-              <p className="p-2 border text-center rounded-sm bg-red-100 border-red-600">
+              <p className="p-2 border text-center rounded-sm bg-red-100 dark:bg-red-500 dark:border-white border-red-600">
                 {error}
               </p>
             </div>

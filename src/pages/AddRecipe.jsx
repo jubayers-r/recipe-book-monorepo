@@ -69,31 +69,34 @@ const AddRecipe = () => {
           </legend>
           <label className="label">Title</label>
           <input
+            dark:text-black
             name="title"
             type="text"
-            className="input w-full"
+            className="input dark:text-black w-full"
             placeholder="Title"
             required
           />
           <label className="label">Image URL</label>
           <input
+            dark:text-black
             name="image"
             type="url"
-            className="input w-full"
+            className="input dark:text-black w-full"
             placeholder="Image URL"
           />
           <label className="label">Ingredients</label>
           <input
+            dark:text-black
             name="ingredients"
             type="text"
-            className="input w-full"
+            className="input dark:text-black w-full"
             placeholder="eg. Egg, White wine, Sugar "
             required
           />
           <label className="label">Instructions</label>
           <textarea
             name="instructions"
-            className="input w-full min-h-[100px] resize-y rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input dark:text-black w-full min-h-[100px] resize-y rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Instructions"
             required
           ></textarea>
@@ -102,7 +105,7 @@ const AddRecipe = () => {
           </label>
           <div className="flex gap-2 items-center">
             <select
-              className="bg-white h-10 rounded-sm px-2 hover:brightness-75 w-full"
+              className="bg-white h-10 rounded-sm px-2 hover:brightness-75 w-full text-black"
               id="cuisine"
               name="cuisineType"
               required
@@ -133,9 +136,10 @@ const AddRecipe = () => {
           </div>
           <label className="label">Preparation Time (in Minutes)</label>
           <input
+            dark:text-black
             name="preparationTime"
             type="number"
-            className="input w-full"
+            className="input dark:text-black w-full"
             placeholder="eg. 10"
           />
           <fieldset className="border border-gray-300 rounded-md p-4">
@@ -145,6 +149,7 @@ const AddRecipe = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="breakfast"
@@ -157,6 +162,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="lunch"
@@ -169,6 +175,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="dinner"
@@ -181,6 +188,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="dessert"
@@ -193,6 +201,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="vegan"
@@ -205,6 +214,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="vegetarian"
@@ -217,6 +227,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="glutenFree"
@@ -229,6 +240,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="keto"
@@ -241,6 +253,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="paleo"
@@ -253,6 +266,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="snacks"
@@ -265,6 +279,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="drinks"
@@ -277,6 +292,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="appetizer"
@@ -289,6 +305,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="soup"
@@ -301,6 +318,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="salad"
@@ -313,6 +331,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="bbq"
@@ -325,6 +344,7 @@ const AddRecipe = () => {
               </div>
               <div>
                 <input
+                  dark:text-black
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="holiday"

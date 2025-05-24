@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { useLoaderData, useParams } from "react-router";
 import { FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { CiHeart } from "react-icons/ci";
-import { handleLikeAPI } from "../API/handleLikeAPI";
 import UpdateRecipe from "./UpdateRecipe";
+import { AuthContext } from "../context/authcontext/AuthContext";
 
 const RecipeDetails = () => {
-// dark mode
+  // dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-const [isDarkMode, setIsDarkMode] = useState(false);
+  useEffect(() => {
+    // Check initially if 'dark' class exists
+    setIsDarkMode(document.documentElement.classList.contains("dark"));
 
-useEffect(() => {
-  // Check initially if 'dark' class exists
-  setIsDarkMode(document.documentElement.classList.contains('dark'));
+    // Optional: observe changes to html classList (if you toggle dark mode dynamically)
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
-  // Optional: observe changes to html classList (if you toggle dark mode dynamically)
-  const observer = new MutationObserver(() => {
-    setIsDarkMode(document.documentElement.classList.contains('dark'));
-  });
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
-  return () => observer.disconnect();
-}, []);
+  // dark mode
 
-// dark mode
-
+  const { user } = use(AuthContext);
 
   const mongoId = useParams().id;
   const recipesData = useLoaderData();
@@ -77,10 +80,43 @@ useEffect(() => {
   };
 
   const [like, setLike] = useState(likeCount);
+
   const handleLike = () => {
-    handleLikeAPI(_id, like, email).then(
-      (res) => res == "Approved" && setLike(like + 1)
-    );
+    if (email == user.email) {
+      Swal.fire({
+        title: "Sorry! You Cannot Like Your Own Post Bruh :)",
+        width: 600,
+        padding: "3em",
+        color: "#716add",
+        background: "#fff url(/images/trees.png)",
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("/nyancat-rainbow-cat.gif")
+          left 100px
+          no-repeat
+        `,
+      });
+    } else {
+
+
+      const updatedLike = like + 1;
+      fetch(`https://recipe-book-app-eosin.vercel.app/recipes/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ like: updatedLike }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.modifiedCount) {
+            setLike((prev) => prev + 1);
+          }
+        })
+        .catch((err) => {
+          console.error("Like failed:", err);
+        });
+    }
   };
 
   return (
@@ -92,17 +128,17 @@ useEffect(() => {
       <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%] ">
         <div className="flex flex-col md:flex-row ">
           <div className="w-full md:w-[50%]">
-          <img
-  className="rounded-lg"
-  src={
-    image
-      ? image
-      : isDarkMode
-      ? "https://cdn-icons-png.flaticon.com/512/3875/3875172.png" // dark mode fallback image
-      : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png" // light mode fallback image
-  }
-  alt={title}
-/>
+            <img
+              className="rounded-lg"
+              src={
+                image
+                  ? image
+                  : isDarkMode
+                  ? "https://cdn-icons-png.flaticon.com/512/3875/3875172.png" // dark mode fallback image
+                  : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png" // light mode fallback image
+              }
+              alt={title}
+            />
           </div>
           <div className="place-items-center mx-auto my-auto">
             <h3 className="sm:text-4xl font-semibold">{title}</h3>
@@ -146,34 +182,32 @@ useEffect(() => {
           </span>{" "}
           {instructions}
         </p>
-        {email && (
+        {email == user.email && (
           <div className="mx-auto my-auto text-center ">
-            <div className="flex justify-center">
-              <div className="flex">
-                <Link to={`/edit/${_id}`}>
-                  <button></button>
-                </Link>
-                {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button
-                  className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit"
-                  onClick={() =>
-                    document.getElementById("my_modal_1").showModal()
-                  }
-                >
-                  Update <FaEdit />
-                </button>
-                <dialog id="my_modal_1" className="modal">
-                  <div className="modal-box">
-                    <UpdateRecipe  />
-                  </div>
-                </dialog>
-                <button
-                  onClick={() => handleDelete(_id)}
-                  className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit"
-                >
-                  Delete <FaEdit />
-                </button>
-              </div>
+            <div className="flex gap-2">
+              <Link to={`/edit/${_id}`}>
+                <button></button>
+              </Link>
+              {/* Open the modal using document.getElementById('ID').showModal() method */}
+              <button
+                className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit"
+                onClick={() =>
+                  document.getElementById("my_modal_1").showModal()
+                }
+              >
+                Update <FaEdit />
+              </button>
+              <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                  <UpdateRecipe />
+                </div>
+              </dialog>
+              <button
+                onClick={() => handleDelete(_id)}
+                className="btn btn-xs sm:btn-lg sm:m-7  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 flex w-fit"
+              >
+                Delete <FaEdit />
+              </button>
             </div>
           </div>
         )}
