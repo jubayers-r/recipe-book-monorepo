@@ -65,7 +65,7 @@ const Hero = () => {
               <img
                 src={src}
                 alt={`Desktop ${idx + 1}`}
-                className="w-full h-[500px] object-cover"
+                className="w-full h-[700px] object-cover"
               />
             </SwiperSlide>
           ))}

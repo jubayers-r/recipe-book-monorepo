@@ -24,6 +24,26 @@ const navLinks = (
     </NavLink>
   </>
 );
+const authenticationLG = (
+  <div className=" hidden sm:flex gap-4 ">
+    <Link to={"/signup"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl">
+      Sign Up
+    </Link>
+    <Link to={"/signin"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl">
+      Sign In
+    </Link>
+  </div>
+);
+const authenticationSM = (
+  <div className="flex gap-2 my-2">
+    <Link to={"/signup"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl">
+      Sign Up
+    </Link>
+    <Link to={"/signin"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl">
+      Sign In
+    </Link>
+  </div>
+);
 
 const Navbar = () => {
   const { user, logout, loading } = use(AuthContext);
@@ -54,6 +74,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {navLinks}
+              {user ? "" : authenticationSM}
             </ul>
           </div>
           <Link to={"/"} className="text-xl">
@@ -110,7 +131,7 @@ const Navbar = () => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 min-w-80 max-w-screen p-2 shadow"
                 >
-                  <div className="flex rounded-lg gap-2 p-2 items-center mb-2 hover:bg-gray-200">
+                  <div className="flex rounded-lg gap-2 p-2 items-center mb-2">
                     <div className="w-10 sm:w-12 h-10 sm:h-12">
                       {!user.photoURL ? (
                         <CgProfile className="rounded-full object-cover w-full h-full" />
@@ -162,20 +183,7 @@ const Navbar = () => {
               </Tooltip.Portal>
             </Tooltip.Root>
           ) : (
-            <>
-              <Link
-                to={"/signup"}
-                className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl"
-              >
-                Sign Up
-              </Link>
-              <Link
-                to={"/signin"}
-                className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl"
-              >
-                Sign In
-              </Link>
-            </>
+            authenticationLG
           )}
         </div>
       </div>

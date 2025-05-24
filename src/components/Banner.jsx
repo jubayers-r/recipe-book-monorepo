@@ -23,7 +23,7 @@ const Banner = () => {
           <Link to={"/signin"}>
             <button
               href="/get-started"
-              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded transition"
+              className="btn"
             >
               GET STARTED
             </button>
