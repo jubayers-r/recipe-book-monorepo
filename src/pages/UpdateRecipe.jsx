@@ -38,20 +38,20 @@ const UpdateRecipe = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-      if (selectedCategories.length === 0) {
-          toast.error("Please select at least one category.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
-          return;
-        }
+    if (selectedCategories.length === 0) {
+      toast.error("Please select at least one category.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return;
+    }
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
@@ -185,7 +185,9 @@ const UpdateRecipe = () => {
             <legend className="text-lg font-semibold mb-2 px-2">
               Categories
             </legend>
-            <p className="mb-5 text-red-500">*(Add Atleast one category to continue)</p>
+            <p className="mb-5 text-red-500">
+              *(Add Atleast one category to continue)
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div>
                 <input
@@ -413,9 +415,14 @@ const UpdateRecipe = () => {
               </div>
             </div>
           </fieldset>
-          <button type="submit" className="btn btn-neutral mt-4">
-            Update
-          </button>
+          <div className="w-full flex justify-center">
+            <button
+              type="submit"
+              className="btn justify-center mt-4 btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex  w-fit my-3"
+            >
+              Update
+            </button>
+          </div>
         </fieldset>
       </form>
     </div>

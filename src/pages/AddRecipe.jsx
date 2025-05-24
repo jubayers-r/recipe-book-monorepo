@@ -165,7 +165,9 @@ const AddRecipe = () => {
               <legend className="text-lg font-semibold mb-2 px-2">
                 Categories
               </legend>
-              <p className="mb-5 text-red-400">*(Add Atleast one category to continue)</p>
+              <p className="mb-5 text-red-400">
+                *(Add Atleast one category to continue)
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
                 <div>
                   <input
@@ -377,9 +379,14 @@ const AddRecipe = () => {
                 </div>
               </div>
             </fieldset>
-            <button type="submit" className="btn btn-neutral mt-4">
-              Post
-            </button>
+            <div className="w-full flex justify-center">
+              <button
+                type="submit"
+                className="btn justify-center mt-4 btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex  w-fit my-3"
+              >
+                Post
+              </button>
+            </div>
           </fieldset>
         </form>
       </Fade>

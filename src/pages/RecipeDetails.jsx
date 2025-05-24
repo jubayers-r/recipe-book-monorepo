@@ -153,8 +153,8 @@ const RecipeDetails = () => {
                 </p>
               ))}
             </div>
-            <div className="btn " onClick={handleLike}>
-              <CiHeart size={25} /> {like}
+            <div className=" hover:bg-red-500 hover:text-white hover:rounded-full " onClick={handleLike}>
+              <CiHeart size={40} />
             </div>
           </div>
         </div>

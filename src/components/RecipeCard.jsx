@@ -7,7 +7,7 @@ const RecipeCard = ({ recipe }) => {
   const { image, title, instructions, cuisineType, category, likeCount, _id } =
     recipe;
   // truncation function for show more ux
-  const maxWords = 12;
+  const maxWords = 15;
   const truncatedInstructions = instructions
     ? instructions.split(" ").slice(0, maxWords).join(" ") +
       (instructions.split(" ").length > maxWords ? "..." : "")
@@ -43,19 +43,23 @@ const RecipeCard = ({ recipe }) => {
                 </p>
               ))}
             </div>
-            <p>{truncatedInstructions}</p>
+            <p className="h-[35px]">{truncatedInstructions}</p>
           </div>
-          <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
-            <div className="btn">
-              <CiHeart size={25} /> {likeCount}
+          <Link to={`/recipeDetails/${_id}`}>
+            <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
+              <div className="btn">
+                <CiHeart size={25} /> {likeCount}
+              </div>
+              <div className="btn ">
+                <LiaComments size={25} /> Discussion
+              </div>
             </div>
-            <div className="btn ">
-              <LiaComments size={25} /> Discussion
-            </div>
-          </div>
+          </Link>
           <div className="flex justify-center my-2">
             <Link to={`/recipeDetails/${_id}`}>
-              <button className="btn w-fit my-3">Read Full Recipe</button>
+              <button className="btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex btn w-fit my-3">
+                See Details
+              </button>
             </Link>
           </div>
         </div>

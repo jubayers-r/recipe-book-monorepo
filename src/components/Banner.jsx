@@ -23,7 +23,7 @@ const Banner = () => {
                 </span>
               </p>
               <Link to={"/signin"}>
-                <button href="/get-started" className="btn">
+                <button href="/get-started" className="btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex btn w-fit my-3">
                   GET STARTED
                 </button>
               </Link>
