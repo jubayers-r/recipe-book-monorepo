@@ -43,7 +43,7 @@ const RecipeCard = ({ recipe }) => {
                 </p>
               ))}
             </div>
-            <p className="h-[35px]">{truncatedInstructions}</p>
+            <p className="h-[40px]">{truncatedInstructions}</p>
           </div>
           <Link to={`/recipeDetails/${_id}`}>
             <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
