@@ -34,9 +34,14 @@ async function run() {
 
     // All recipes related apis
     app.get("/recipes", async (req, res) => {
-      const result = await RecipeDB.find().toArray();
+      const result = await RecipeDB.find().sort({ _id: -1 }).toArray();
       res.send(result);
     });
+
+    app.get("/topRecipes", async (req, res) => {
+      const result = await RecipeDB.find().sort({likeCount: -1}).limit(6).toArray();
+      res.send(result);
+    })
 
     app.post("/recipes", async (req, res) => {
       const recipeDetails = req.body;
