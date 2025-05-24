@@ -39,9 +39,12 @@ async function run() {
     });
 
     app.get("/topRecipes", async (req, res) => {
-      const result = await RecipeDB.find().sort({likeCount: -1}).limit(6).toArray();
+      const result = await RecipeDB.find()
+        .sort({ likeCount: -1 })
+        .limit(6)
+        .toArray();
       res.send(result);
-    })
+    });
 
     app.post("/recipes", async (req, res) => {
       const recipeDetails = req.body;
@@ -51,32 +54,49 @@ async function run() {
 
     app.patch("/recipes/:id", async (req, res) => {
       const id = req.params.id;
-      const {likeCount} = req.body;
-      const query = {_id: new ObjectId(id)};
+      const { likeCount } = req.body;
+      const query = { _id: new ObjectId(id) };
       const updatedDoc = {
-        $inc: { likeCount: 1 }
-      }
+        $inc: { likeCount: 1 },
+      };
       const result = await RecipeDB.updateOne(query, updatedDoc);
       res.send(result);
-    })
+    });
 
-
-// my recipes related api
+    // my recipes related api
     app.get("/myRecipes", async (req, res) => {
       const email = req.query.email;
       const query = { email: email };
       const result = await RecipeDB.find(query).toArray();
       res.send(result);
     });
-    app.put("/myRecipes/:id", async (req, res) => {
+
+    app.patch("/myRecipes/:id", async (req, res) => {
       const id = req.params.id;
-      const {image, title, ingredients, instructions, cuisineType, preparationTime, category, email, likeCount} = req.body;
+      const {
+        image,
+        title,
+        ingredients,
+        instructions,
+        cuisineType,
+        preparationTime,
+        category,
+        email,
+      } = req.body;
       const query = { _id: new ObjectId(id) };
-      const replacement = {
-        image:image, title:title, ingredients:ingredients, instructions:instructions, cuisineType:cuisineType, preparationTime:preparationTime, category:category, email: email,
-        likeCount: likeCount
-      }
-      const result = await RecipeDB.replaceOne(query, replacement);
+      const updatedDoc = {
+        $set: {
+          image: image,
+          title: title,
+          ingredients: ingredients,
+          instructions: instructions,
+          cuisineType: cuisineType,
+          preparationTime: preparationTime,
+          category: category,
+          email: email,
+        },
+      };
+      const result = await RecipeDB.updateOne(query, updatedDoc);
       res.send(result);
     });
     app.delete("/myRecipes/:id", async (req, res) => {
@@ -93,13 +113,13 @@ async function run() {
       res.send(result);
     });
     app.patch("/users", async (req, res) => {
-      const {email, lastSignInTime} = req.body;
-      const filter = {email: email};
-      const updatedDoc =  {
+      const { email, lastSignInTime } = req.body;
+      const filter = { email: email };
+      const updatedDoc = {
         $set: {
-          lastSignInTime: lastSignInTime
-        }
-      }
+          lastSignInTime: lastSignInTime,
+        },
+      };
       const result = await UsersDB.updateOne(filter, updatedDoc);
       res.send(result);
     });
