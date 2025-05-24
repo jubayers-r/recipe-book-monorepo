@@ -22,7 +22,7 @@ const TopRecipes = ({ topRecipes }) => {
         {text}
       </h1>
       <Slide direction="left">
-        <Fade duration={2000}>
+        <Fade duration={1000}>
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-5">
             {topRecipes.map((recipe) => (
               <RecipeCard key={recipe._id} recipe={recipe} />

@@ -38,6 +38,20 @@ const UpdateRecipe = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
+      if (selectedCategories.length === 0) {
+          toast.error("Please select at least one category.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          return;
+        }
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
@@ -171,6 +185,7 @@ const UpdateRecipe = () => {
             <legend className="text-lg font-semibold mb-2 px-2">
               Categories
             </legend>
+            <p className="mb-5 text-red-500">*(Add Atleast one category to continue)</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div>
                 <input
