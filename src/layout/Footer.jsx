@@ -4,7 +4,8 @@ const Footer = () => {
   return (
     <footer>
       <footer className=" bg-base-300 py-10">
-        <div className="w-9/11 footer place-items-center text-base-content p-10 grid xl:grid-cols-4 grid-rows-3 xl:grid-rows-1 mx-auto">
+        <div className="w-9/11 footer place-items-center text-base-content p-10 grid xl:grid-cols-4 grid-rows-3 xl:grid-rows-1 mx-auto  ">
+
           <div className="text-md sm:text-xl text-center">
             <h3 className="font-bold font-[Poetsen_One] text-lg sm:text-2xl w-full">
               TasteScript
@@ -18,8 +19,8 @@ const Footer = () => {
             <p> Helpline: 01322-901105 , 01322-810874</p>
             <p> (Available : Sat - Thu, 10:00 AM to 7:00 PM)</p>
           </div>
-          <nav className="place-items-center ">
-            <h6 className="footer-title">Follow Us</h6>
+          <nav className="xl:navbar-end xl:grid place-items-center">
+            <h6 className="footer-title ">Follow Us</h6>
             <div className="grid grid-flow-col gap-4 ">
               <a href="https://x.com/jubayers_r">
                 <svg

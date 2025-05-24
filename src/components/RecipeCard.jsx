@@ -52,7 +52,7 @@ const RecipeCard = ({ recipe }) => {
       </div>
       <div className="flex justify-center my-2">
         <Link to={`/recipeDetails/${_id}`}>
-          <button className="btn w-fit">Read Full Recipe</button>
+          <button className="btn w-fit my-3">Read Full Recipe</button>
         </Link>
       </div>
     </div>

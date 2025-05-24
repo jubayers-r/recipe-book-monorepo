@@ -1,15 +1,12 @@
 import React, { use } from "react";
 import { Link, NavLink } from "react-router";
-
 import "./Navbar.css";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import * as Tooltip from "@radix-ui/react-tooltip";
-
 import { IoLogOutOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { AuthContext } from "../context/authcontext/AuthContext";
 import DarkModeToggle from "../context/themeContext/DarkModeToggle";
-
 
 const navLinks = (
   <>
@@ -61,7 +58,6 @@ const Navbar = () => {
           </div>
           <Link to={"/"} className="text-xl">
             <div className="flex gap-2 items-center justify-center">
-              <div className="sm:w-20 w-10"></div>
               <div className="w-15 hidden sm:block">
                 <img
                   src="https://www.svgrepo.com/show/383674/menu-food-fork.svg"
@@ -77,12 +73,11 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-5  text-xl">
             {navLinks}
-
           </ul>
         </div>
 
         <div className="navbar-end gap-7 ">
-        <DarkModeToggle />
+          <DarkModeToggle />
           {loading ? (
             <span className="loading loading-bars loading-xl " />
           ) : user ? (
