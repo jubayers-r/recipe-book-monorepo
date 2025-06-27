@@ -11,6 +11,7 @@ import UpdateRecipe from "../pages/UpdateRecipe";
 import PrivetRoute from "./PrivetRoute";
 import Home from "../pages/Home";
 import Support from "../components/Support";
+import Dashboard from "../pages/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,15 @@ export const router = createBrowserRouter([
             <MyRecipes />
           </PrivetRoute>
         ),
+      },
+      {
+        path: "dashboard",
+        element: (
+          <PrivetRoute>
+            <Dashboard />
+          </PrivetRoute>
+        ),
+         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
       },
       {
         path: "edit/:id",

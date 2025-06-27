@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-const links = (
+export const links = (
   <>
     <Link to={"/"}>
       <p className="hover:border-b hover:text-[#00684a]  border-[#00684a]  text-right">

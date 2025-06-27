@@ -25,6 +25,9 @@ const navLinks = (
     <NavLink to={"/support"}>
       <p className="hover:text-[#00684a] text-right">Support</p>
     </NavLink>
+    <NavLink to={"/dashboard"}>
+      <p className="hover:text-[#00684a] text-right">Dashboard</p>
+    </NavLink>
   </>
 );
 const authenticationLG = (
