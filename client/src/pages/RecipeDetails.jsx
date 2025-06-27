@@ -97,8 +97,6 @@ const RecipeDetails = () => {
         `,
       });
     } else {
-
-
       const updatedLike = like + 1;
       fetch(`https://recipe-book-app-eosin.vercel.app/recipes/${_id}`, {
         method: "PATCH",
@@ -120,12 +118,12 @@ const RecipeDetails = () => {
   };
 
   return (
-    <div className="dark:text-white">
+    <div className="dark:text-white ">
       <p className="text-2xl font-semibold p-7 text-center ">
         {like} people are interested in this recipe
       </p>
 
-      <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%] ">
+      <div className="p-5 border rounded-lg my-10 mx-auto flex flex-col w-[70%] bg-white dark:bg-[#373737a1]">
         <div className="flex flex-col md:flex-row ">
           <div className="w-full md:w-[50%]">
             <img
@@ -153,14 +151,17 @@ const RecipeDetails = () => {
                 </p>
               ))}
             </div>
-            <div className=" hover:bg-red-500 hover:text-white hover:rounded-full " onClick={handleLike}>
+            <div
+              className=" hover:bg-red-500 hover:text-white hover:rounded-full "
+              onClick={handleLike}
+            >
               <CiHeart size={40} />
             </div>
           </div>
         </div>
 
         <div className="grid sm:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-9 gap-2 font-black mt-5 mb-2 items-center text-center">
-          <h3 className="border-b-1 w-fit">Ingredients:</h3>
+          <h3 className="border-b-1 w-fit sm:text-xl">Ingredients:</h3>
           {ingredients.map((ingredient, index) => (
             <p
               key={index}
@@ -170,18 +171,23 @@ const RecipeDetails = () => {
             </p>
           ))}
         </div>
-        <p className="font-bold">
-          <span className="border-b-1"> Estimated making time:</span>
-          <span className="font-medium">
-            {preparationTime ? ` ${preparationTime} Minutes` : "Not Provided"}{" "}
-          </span>
-        </p>
-        <p className="text-xl">
-          <span className="font-bold border-b-1">
-            Here the instruction goes:
-          </span>{" "}
-          {instructions}
-        </p>
+        <div className="grid gap-3">
+          <p className="font-bold">
+            <span className="border-b-1 sm:text-xl">
+              {" "}
+              Estimated making time:
+            </span>
+            <span className="font-medium sm:text-xl">
+              {preparationTime ? ` ${preparationTime} Minutes` : "Not Provided"}{" "}
+            </span>
+          </p>
+          <p className="sm:text-xl">
+            <span className="font-bold border-b-1 ">
+              Here the instruction goes:
+            </span>{" "}
+            {instructions}
+          </p>
+        </div>
         {email == user.email && (
           <div className="mx-auto my-auto text-center ">
             <div className="flex gap-2">

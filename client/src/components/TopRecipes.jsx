@@ -17,13 +17,13 @@ const TopRecipes = ({ topRecipes }) => {
   });
 
   return (
-    <div className="w-9/11 mx-auto">
+    <div className=" mx-auto">
       <h1 className="sm:text-4xl text-2xl font-bold text-center my-5 min-h-[50px] dark:text-white">
         {text}
       </h1>
       <Slide direction="left">
         <Fade duration={1000}>
-          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
             {topRecipes.map((recipe) => (
               <RecipeCard key={recipe._id} recipe={recipe} />
             ))}

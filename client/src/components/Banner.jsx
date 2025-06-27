@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <Slide direction="left">
       <Fade duration={1000}>
-        <section className="bg-gray-900 text-white py-16 px-6 md:px-12 lg:px-24 my-20 rounded-4xl w-9/11 mx-auto">
+        <section className="bg-gray-900 text-white py-16 px-6 md:px-12 lg:px-24 my-20 rounded-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Text Block */}
             <div>
@@ -23,7 +23,10 @@ const Banner = () => {
                 </span>
               </p>
               <Link to={"/signin"}>
-                <button href="/get-started" className="btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex btn w-fit my-3">
+                <button
+                  href="/get-started"
+                  className="hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex btn w-fit my-3"
+                >
                   GET STARTED
                 </button>
               </Link>

@@ -41,16 +41,16 @@ const Hero = () => {
   };
 
   return (
-    <div>
+    <div className="my-15">
       {/* Tablet/Mobile Swiper */}
-      <div className="block md:hidden">
+      <div className="block md:hidden ">
         <Swiper {...swiperProps}>
           {imageListT.map((src, idx) => (
             <SwiperSlide key={idx}>
               <img
                 src={src}
                 alt={`Tab ${idx + 1}`}
-                className="w-full h-auto object-cover"
+                className="w-full h-[600px] object-cover rounded-2xl"
               />
             </SwiperSlide>
           ))}
@@ -65,7 +65,7 @@ const Hero = () => {
               <img
                 src={src}
                 alt={`Desktop ${idx + 1}`}
-                className="w-full h-[700px] object-cover"
+                className="w-full h-[700px] object-cover rounded-3xl"
               />
             </SwiperSlide>
           ))}

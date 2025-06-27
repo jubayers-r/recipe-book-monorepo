@@ -103,7 +103,6 @@ const UpdateRecipe = () => {
           </legend>
           <label className="label">Title</label>
           <input
-            dark:text-black
             name="title"
             type="text"
             className="input dark:text-black w-full"
@@ -113,7 +112,7 @@ const UpdateRecipe = () => {
           />
           <label className="label">Image URL</label>
           <input
-            dark:text-black
+
             name="image"
             type="url"
             className="input dark:text-black w-full"
@@ -122,7 +121,6 @@ const UpdateRecipe = () => {
           />
           <label className="label">Ingredients</label>
           <input
-            dark:text-black
             name="ingredients"
             type="text"
             className="input dark:text-black w-full"
@@ -174,7 +172,6 @@ const UpdateRecipe = () => {
           </div>
           <label className="label">Preparation Time (in Minutes)</label>
           <input
-            dark:text-black
             name="preparationTime"
             type="number"
             className="input dark:text-black w-full"
@@ -191,7 +188,7 @@ const UpdateRecipe = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="breakfast"
@@ -205,7 +202,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="lunch"
@@ -219,7 +216,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="dinner"
@@ -233,7 +230,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="dessert"
@@ -247,7 +244,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="vegan"
@@ -261,7 +258,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="vegetarian"
@@ -275,7 +272,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="glutenFree"
@@ -289,7 +286,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="keto"
@@ -303,7 +300,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="paleo"
@@ -317,7 +314,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="snacks"
@@ -331,7 +328,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="drinks"
@@ -345,7 +342,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="appetizer"
@@ -359,7 +356,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="soup"
@@ -373,7 +370,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="salad"
@@ -387,7 +384,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="bbq"
@@ -401,7 +398,7 @@ const UpdateRecipe = () => {
               </div>
               <div>
                 <input
-                  dark:text-black
+
                   onChange={handleCategoryChange}
                   type="checkbox"
                   id="holiday"
@@ -418,7 +415,7 @@ const UpdateRecipe = () => {
           <div className="w-full flex justify-center">
             <button
               type="submit"
-              className="btn justify-center mt-4 btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex  w-fit my-3"
+              className="btn justify-center mt-4  hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex  w-fit my-3"
             >
               Update
             </button>

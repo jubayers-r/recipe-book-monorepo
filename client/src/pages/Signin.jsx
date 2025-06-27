@@ -169,6 +169,14 @@ const Signin = () => {
           )}
         </fieldset>
       </form>
+      <div className="flex justify-center">
+        <button
+          onClick={() => navigate("/")}
+          className="btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black  mt-5 btn-lg flex w-fit"
+        >
+          Go to Homepage
+        </button>
+      </div>
     </div>
   );
 };

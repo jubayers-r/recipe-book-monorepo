@@ -4,6 +4,7 @@ import TopRecipes from "../components/TopRecipes";
 import FAQ from "../components/FAQ";
 import Banner from "../components/Banner";
 import Hero from "../components/Hero";
+import TrustedCompaniesSection from "../components/TrustedCompaniesSection";
 
 const Home = () => {
   const topRecipes = useLoaderData();
@@ -12,6 +13,7 @@ const Home = () => {
       <Hero/>
       <TopRecipes topRecipes={topRecipes} />
       <Banner/>
+      <TrustedCompaniesSection/>
       <FAQ/>
     </div>
   );

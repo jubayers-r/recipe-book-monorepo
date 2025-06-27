@@ -1,8 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Playwrite+HU:wght@100..400&family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Playwrite+HU:wght@100..400&family=Poetsen+One&display=swap&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 @plugin "daisyui" {
 themes: light --default;
 }
+/* light */
+/* @plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+--color-base-content: '#130d06',
+--color-base-100: '#fcf8f3',
+--color-primary: '#ce934b',
+--color-secondary: '#e1b989',
+--color-accent: '#dda764',
+} */
+
+/* [data-theme="light"] {
+  .my-btn {
+    background-color: #1EA1F1;
+    border-color: #1EA1F1;
+  }
+  .my-btn:hover {
+    background-color: #1C96E1;
+    border-color: #1C96E1;
+  }
+} */
+
+/* dark */
+
+/* @plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+ --color-base-content: '#f9f3ec',
+ --color-base-100: '#0c0803',
+ --color-primary: '#b47931',
+ --color-secondary: '#764e1e',
+ --color-accent: '#9b6422',
+} */
+/* [data-theme="dark"] {
+  .my-btn {
+    background-color: #1EA1F1;
+    border-color: #1EA1F1;
+  }
+  .my-btn:hover {
+    background-color: #1C96E1;
+    border-color: #1C96E1;
+  }
+} */
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 

@@ -11,26 +11,29 @@ import DarkModeToggle from "../context/themeContext/DarkModeToggle";
 const navLinks = (
   <>
     <NavLink to={"/"}>
-      <p className="hover:text-[#00684a]">Home</p>
+      <p className="hover:text-[#00684a] text-right">Home</p>
     </NavLink>
     <NavLink to={"/recipes"}>
-      <p className="hover:text-[#00684a]">All Recipes</p>
+      <p className="hover:text-[#00684a] text-right">All Recipes</p>
     </NavLink>
     <NavLink to={"/addRecipe"}>
-      <p className="hover:text-[#00684a]">Add Recipe</p>
+      <p className="hover:text-[#00684a] text-right">Add Recipe</p>
     </NavLink>
     <NavLink to={"/myRecipes"}>
-      <p className="hover:text-[#00684a]">My Recipes</p>
+      <p className="hover:text-[#00684a] text-right">My Recipes</p>
+    </NavLink>
+    <NavLink to={"/support"}>
+      <p className="hover:text-[#00684a] text-right">Support</p>
     </NavLink>
   </>
 );
 const authenticationLG = (
   <div className=" hidden sm:flex gap-4 ">
-    <Link to={"/signup"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl">
-      Sign Up
-    </Link>
-    <Link to={"/signin"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl">
+    <Link to={"/signin"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl bg-white rounded-xl">
       Sign In
+    </Link>
+    <Link to={"/signup"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl bg-white rounded-xl">
+      Sign Up
     </Link>
   </div>
 );
@@ -48,8 +51,8 @@ const authenticationSM = (
 const Navbar = () => {
   const { user, logout, loading } = use(AuthContext);
   return (
-    <div className="bg-base-100 shadow-sm">
-      <div className="w-9/11 mx-auto navbar">
+    <div className="bg-base-100 shadow-sm rounded-2xl mt-7 px-8 py-2 sticky top-0 z-100">
+      <div className=" mx-auto navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -91,12 +94,11 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-5  text-xl">
+        <div className="navbar-center hidden xl:flex">
+          <ul className="menu menu-horizontal px-1 gap-9 text-xl">
             {navLinks}
           </ul>
         </div>
-
         <div className="navbar-end gap-7 ">
           <DarkModeToggle />
           {loading ? (

@@ -4,10 +4,9 @@ import { Link } from "react-router";
 import { Slide, Fade } from "react-awesome-reveal";
 
 const RecipeCard = ({ recipe }) => {
-  const { image, title, instructions, cuisineType, category, likeCount, _id } =
-    recipe;
+  const { image, title, instructions, cuisineType, likeCount, _id } = recipe;
   // truncation function for show more ux
-  const maxWords = 15;
+  const maxWords = 10;
   const truncatedInstructions = instructions
     ? instructions.split(" ").slice(0, maxWords).join(" ") +
       (instructions.split(" ").length > maxWords ? "..." : "")
@@ -16,24 +15,30 @@ const RecipeCard = ({ recipe }) => {
   return (
     <Slide direction="left">
       <Fade duration={1000}>
-        <div className="card bg-base-100 shadow-sm ">
+        <div className="card bg-base-100 shadow-sm hover:shadow-lg dark:shadow-white pb-2">
           <figure className="w-full h-50">
-            <img
-              src={
-                image
-                  ? image
-                  : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png"
-              }
-              alt={title}
-              className=" object-cover"
-            />
+            <Link to={`/recipeDetails/${_id}`}>
+              <img
+                src={
+                  image
+                    ? image
+                    : "https://cdn-icons-png.flaticon.com/512/3875/3875148.png"
+                }
+                alt={title}
+                className=" object-cover hover:brightness-105 h-65"
+              />
+            </Link>
           </figure>
-          <div className="card-body">
+          <div className="card-body py-3">
             <div className="flex flex-col sm:flex-row sm:gap-5 gap-2 items-center">
-              <h2 className="card-title">{title}</h2>
-              <div className="badge badge-secondary ">{cuisineType}</div>
+              <Link to={`/recipeDetails/${_id}`}>
+                <h2 className="card-title hover:border-b border-[#00684a]  hover:text-[#00684a] ">
+                  {title}
+                </h2>
+              </Link>
             </div>
-            <div className="card-actions justify-end grid grid-cols-2 2xl:grid-cols-3">
+            <div className="badge badge-secondary ">{cuisineType}</div>
+            {/* <div className="card-actions justify-end grid grid-cols-2 2xl:grid-cols-3">
               {category.map((category, index) => (
                 <p
                   key={index}
@@ -42,24 +47,18 @@ const RecipeCard = ({ recipe }) => {
                   {category}
                 </p>
               ))}
-            </div>
+            </div> */}
             <p className="h-[40px]">{truncatedInstructions}</p>
           </div>
-          <Link to={`/recipeDetails/${_id}`}>
-            <div className="grid grid-cols-2 gap-2 justify-center w-[80%] mx-auto">
-              <div className="btn">
-                <CiHeart size={25} /> {likeCount}
-              </div>
-              <div className="btn ">
-                <LiaComments size={25} /> Discussion
-              </div>
-            </div>
-          </Link>
-          <div className="flex justify-center my-2">
+
+          <div className="flex gap-3 justify-center my-2">
             <Link to={`/recipeDetails/${_id}`}>
-              <button className="btn hover:bg-[#00ed64] hover:rounded-full hover:border hover:border-black btn-lg flex btn w-fit my-3">
-                See Details
+              <button className="btn btn-lg">
+                <CiHeart size={25} /> {likeCount}
               </button>
+            </Link>
+            <Link to={`/recipeDetails/${_id}`}>
+              <button className="btn btn-lg">See More</button>
             </Link>
           </div>
         </div>

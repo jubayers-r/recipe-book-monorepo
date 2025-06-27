@@ -10,6 +10,7 @@ import MyRecipes from "../pages/MyRecipes";
 import UpdateRecipe from "../pages/UpdateRecipe";
 import PrivetRoute from "./PrivetRoute";
 import Home from "../pages/Home";
+import Support from "../components/Support";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,8 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("https://recipe-book-app-eosin.vercel.app/topRecipes"),
+        loader: () =>
+          fetch("https://recipe-book-app-eosin.vercel.app/topRecipes"),
       },
       {
         path: "signin",
@@ -31,8 +33,16 @@ export const router = createBrowserRouter([
         Component: Signup,
       },
       {
+        path: "support",
+        Component: Support,
+      },
+      {
         path: "addRecipe",
-        element: <PrivetRoute><AddRecipe/></PrivetRoute> ,
+        element: (
+          <PrivetRoute>
+            <AddRecipe />
+          </PrivetRoute>
+        ),
       },
       {
         path: "recipes",
@@ -41,17 +51,28 @@ export const router = createBrowserRouter([
       },
       {
         path: "recipeDetails/:id",
-        element: <PrivetRoute><RecipeDetails/></PrivetRoute>,
+        element: (
+          <PrivetRoute>
+            <RecipeDetails />
+          </PrivetRoute>
+        ),
         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
       },
       {
         path: "myRecipes",
-        element: <PrivetRoute><MyRecipes/></PrivetRoute>,
-
+        element: (
+          <PrivetRoute>
+            <MyRecipes />
+          </PrivetRoute>
+        ),
       },
       {
         path: "edit/:id",
-        element: <PrivetRoute><UpdateRecipe/></PrivetRoute>,
+        element: (
+          <PrivetRoute>
+            <UpdateRecipe />
+          </PrivetRoute>
+        ),
         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
       },
     ],
