@@ -1,4 +1,4 @@
-  import Marquee from "react-fast-marquee";
+import Marquee from "react-fast-marquee";
 
 const companies = [
   { name: "amazon", logo: "/logos/amazon.png" },
@@ -13,7 +13,7 @@ export default function TrustedCompaniesSection() {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4 text-center ">
-        <h2 className="text-2xl md:text-3xl font-bold mb-20 text-[#03373D]">
+        <h2 className="text-2xl md:text-3xl font-bold mb-20 text-[#03373D] dark:text-white">
           We've helped thousands of People from
         </h2>
 
@@ -23,16 +23,16 @@ export default function TrustedCompaniesSection() {
           pauseOnHover={false}
           className="flex items-center"
         >
-            <div className="flex gap-30">
-          {companies.map((company, index) => (
+          <div className="flex gap-25 ">
+            {companies.map((company, index) => (
               <img
-              key={index}
+                key={index}
                 src={company.logo}
                 alt={company.name}
-                className=" w-auto transition duration-300"
+                className=" w-auto transition duration-300 dark:bg-white rounded-lg p-1"
               />
             ))}
-            </div>
+          </div>
         </Marquee>
       </div>
     </section>
