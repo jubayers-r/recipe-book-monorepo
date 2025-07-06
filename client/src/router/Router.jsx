@@ -11,8 +11,11 @@ import UpdateRecipe from "../pages/UpdateRecipe";
 import PrivetRoute from "./PrivetRoute";
 import Home from "../pages/Home";
 import Support from "../components/Support";
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/Dashboard/Dashboard";
 import Gallery from "../pages/Gallery";
+import DashAllRecipes from "../pages/Dashboard/DashAllRecipies";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashMyRecipes from "../pages/Dashboard/DashMyRecipies";
 
 export const router = createBrowserRouter([
   {
@@ -68,15 +71,7 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
-      {
-        path: "dashboard",
-        element: (
-          <PrivetRoute>
-            <Dashboard />
-          </PrivetRoute>
-        ),
-         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
-      },
+
       {
         path: "edit/:id",
         element: (
@@ -85,6 +80,31 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivetRoute>
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
+    children: [
+      {
+        index: true,
+        Component: Dashboard,
+        loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
+      },
+      {
+        path: "recipes",
+        Component: DashAllRecipes,
+        loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
+      },
+      {
+        path: "myRecipes",
+        Component: DashMyRecipes,
+
       },
     ],
   },

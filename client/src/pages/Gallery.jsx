@@ -27,7 +27,7 @@ export default function Gallery() {
 
   return (
     <>
-      <div className="space-y-3 my-3">
+      <div className="space-y-3 my-3 dark:text-white">
         {/* <div className="mask-[url(/stroke.png)] bg-[url(/bg-food.png)] ">
         </div> */}
           <h3 className="text-3xl font-bold text-center">Gallery</h3>

@@ -53,12 +53,14 @@ const RecipeCard = ({ recipe }) => {
 
           <div className="flex gap-3 justify-center my-2">
             <Link to={`/recipeDetails/${_id}`}>
-              <button className="btn btn-lg">
+              <button className="btn btn-lg hover:bg-[#00ed64]">
                 <CiHeart size={25} /> {likeCount}
               </button>
             </Link>
             <Link to={`/recipeDetails/${_id}`}>
-              <button className="btn btn-lg">See More</button>
+              <button className="btn btn-lg hover:bg-[#00ed64] ">
+                See More
+              </button>
             </Link>
           </div>
         </div>

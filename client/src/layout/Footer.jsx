@@ -21,9 +21,9 @@ export const links = (
         My Recipes
       </p>
     </Link>
-    <Link to={"/support"}>
+    <Link to={"/gallery"}>
       <p className="hover:border-b hover:text-[#00684a]  border-[#00684a]  text-right">
-        Support
+        Gallery
       </p>
     </Link>
   </>
