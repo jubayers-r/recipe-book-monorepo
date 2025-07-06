@@ -5,17 +5,19 @@ import FAQ from "../components/FAQ";
 import Banner from "../components/Banner";
 import Hero from "../components/Hero";
 import TrustedCompaniesSection from "../components/TrustedCompaniesSection";
+import NewsletterCard from "../components/Newsletter";
 
 const Home = () => {
   const topRecipes = useLoaderData();
   return (
-    <div>
+    <>
       <Hero/>
       <TopRecipes topRecipes={topRecipes} />
       <Banner/>
       <TrustedCompaniesSection/>
       <FAQ/>
-    </div>
+      <NewsletterCard/>
+    </>
   );
 };
 

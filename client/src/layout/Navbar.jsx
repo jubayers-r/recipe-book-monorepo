@@ -32,10 +32,16 @@ const navLinks = (
 );
 const authenticationLG = (
   <div className=" hidden sm:flex gap-4 ">
-    <Link to={"/signin"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl bg-white rounded-xl">
+    <Link
+      to={"/signin"}
+      className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl bg-white rounded-xl"
+    >
       Sign In
     </Link>
-    <Link to={"/signup"} className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl bg-white rounded-xl">
+    <Link
+      to={"/signup"}
+      className="btn btn-xs sm:btn-md lg:btn-lg lg:text-xl bg-white rounded-xl"
+    >
       Sign Up
     </Link>
   </div>
@@ -54,7 +60,7 @@ const authenticationSM = (
 const Navbar = () => {
   const { user, logout, loading } = use(AuthContext);
   return (
-    <div className="bg-base-100 shadow-sm rounded-2xl mt-7 px-8 py-2 sticky top-0 z-100">
+    <div className="bg-base-100 shadow-sm rounded-2xl mt-7 px-8 py-2 sticky top-5 z-100">
       <div className=" mx-auto navbar">
         <div className="navbar-start">
           <div className="dropdown">
