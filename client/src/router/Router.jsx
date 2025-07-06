@@ -12,6 +12,7 @@ import PrivetRoute from "./PrivetRoute";
 import Home from "../pages/Home";
 import Support from "../components/Support";
 import Dashboard from "../pages/Dashboard";
+import Gallery from "../pages/Gallery";
 
 export const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ export const router = createBrowserRouter([
         Component: Signup,
       },
       {
-        path: "support",
-        Component: Support,
+        path: "gallery",
+        Component: Gallery,
       },
       {
         path: "addRecipe",

@@ -22,7 +22,7 @@ const MainLayout = () => {
     }
   }, [location]);
   return (
-    <div className=" w-full mx-auto px-4 flex flex-col bg-[#ebebeb] dark:bg-black font-[Urbanist]">
+    <div className=" min-h-screen w-full mx-auto px-4 flex flex-col bg-[#ebebeb] dark:bg-black font-[Urbanist]">
       <div className="min-h-screen flex flex-col w-10/11 mx-auto my-auto">
         <Navbar />
         <main className="flex-grow flex flex-col justify-center mb-15">

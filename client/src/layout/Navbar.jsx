@@ -22,8 +22,8 @@ const navLinks = (
     <NavLink to={"/myRecipes"}>
       <p className="hover:text-[#00684a] text-right">My Recipes</p>
     </NavLink>
-    <NavLink to={"/support"}>
-      <p className="hover:text-[#00684a] text-right">Support</p>
+    <NavLink to={"/gallery"}>
+      <p className="hover:text-[#00684a] text-right">Gallery</p>
     </NavLink>
     <NavLink to={"/dashboard"}>
       <p className="hover:text-[#00684a] text-right">Dashboard</p>
