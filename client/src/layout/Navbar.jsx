@@ -8,28 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { AuthContext } from "../context/authcontext/AuthContext";
 import DarkModeToggle from "../context/themeContext/DarkModeToggle";
 
-const navLinks = (
-  <>
-    <NavLink to={"/"}>
-      <p className="hover:text-[#00684a] text-right">Home</p>
-    </NavLink>
-    <NavLink to={"/recipes"}>
-      <p className="hover:text-[#00684a] text-right">All Recipes</p>
-    </NavLink>
-    <NavLink to={"/addRecipe"}>
-      <p className="hover:text-[#00684a] text-right">Add Recipe</p>
-    </NavLink>
-    <NavLink to={"/myRecipes"}>
-      <p className="hover:text-[#00684a] text-right">My Recipes</p>
-    </NavLink>
-    <NavLink to={"/gallery"}>
-      <p className="hover:text-[#00684a] text-right">Gallery</p>
-    </NavLink>
-    <NavLink to={"/dashboard"}>
-      <p className="hover:text-[#00684a] text-right">Dashboard</p>
-    </NavLink>
-  </>
-);
+
 const authenticationLG = (
   <div className=" hidden sm:flex gap-4 ">
     <Link
@@ -59,6 +38,32 @@ const authenticationSM = (
 
 const Navbar = () => {
   const { user, logout, loading } = use(AuthContext);
+
+  const navLinks = (
+  <>
+    <NavLink to={"/"}>
+      <p className="hover:text-[#00684a] text-right">Home</p>
+    </NavLink>
+    <NavLink to={"/recipes"}>
+      <p className="hover:text-[#00684a] text-right">All Recipes</p>
+    </NavLink>
+    <NavLink to={"/addRecipe"}>
+      <p className="hover:text-[#00684a] text-right">Add Recipe</p>
+    </NavLink>
+    <NavLink to={"/myRecipes"}>
+      <p className="hover:text-[#00684a] text-right">My Recipes</p>
+    </NavLink>
+    <NavLink to={"/gallery"}>
+      <p className="hover:text-[#00684a] text-right">Gallery</p>
+    </NavLink>
+
+   { user &&
+    <NavLink to={"/dashboard"}>
+      <p className="hover:text-[#00684a] text-right">Dashboard</p>
+    </NavLink>}
+  </>
+);
+
   return (
     <div className="bg-base-100 shadow-sm rounded-2xl mt-7 px-8 py-2 sticky top-5 z-100">
       <div className=" mx-auto navbar">
