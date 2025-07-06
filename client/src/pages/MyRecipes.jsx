@@ -22,11 +22,11 @@ const MyRecipes = () => {
     );
   }
   return (
-    <div className="  mx-auto">
+    <div>
       <h3 className="dark:text-white text-2xl sm:text-3xl my-5 text-center font-bold">
         My Posts
       </h3>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 w-full gap-5">
         {data.length == 0 ? (
           <div className="space-y-10 mx-auto text-center col-span-5 mt-10">
             <p className="font-bold text-2xl dark:text-white">
