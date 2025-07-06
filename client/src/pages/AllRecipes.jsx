@@ -19,9 +19,20 @@ const AllRecipes = () => {
     setSort(value);
   };
 
+  const [query, setQuery] = useState("");
+  const filteredData = recipesData.filter((recipe) =>
+    recipe.title.toLowerCase().includes(query)
+  );
+
   return (
-    <div className=" mx-auto ">
-      <div className="flex flex-col lg:flex-row justify-between items-center my-5 ">
+    <div>
+      <input
+        placeholder="Search"
+         className="w-full text-center text-xl my-5 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2e8251] dark:text-white"
+        onChange={(e) => setQuery(e.target.value.toLowerCase())}
+      />
+
+      <div className="flex flex-col lg:flex-row justify-between items-center ">
         <h3 className="text-2xl md:text-3xl font-bold text-center mb-5 dark:text-white ">
           Taste Your Buds Out
         </h3>
@@ -55,7 +66,8 @@ const AllRecipes = () => {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
-        {recipesData
+        { filteredData.length ?
+        filteredData
           .filter((recipe) => {
             // If type is "Default", don't filter; otherwise, filter by cuisineType
             return type === "Default" ? true : recipe.cuisineType === type;
@@ -71,7 +83,10 @@ const AllRecipes = () => {
           })
           .map((recipe) => (
             <RecipeCard key={recipe._id} recipe={recipe} />
-          ))}
+          )) : <div className="w-full text-center col-span-5">
+    <h3 className="text-2xl font-semibold dark:text-white">No Data Found</h3>
+  </div>
+        }
       </div>
     </div>
   );
