@@ -1,21 +1,27 @@
+import React, { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layout/MainLayout";
 import Error from "../pages/Error";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import AddRecipe from "../pages/AddRecipe";
-import AllRecipes from "../pages/AllRecipes";
-import RecipeDetails from "../pages/RecipeDetails";
-import MyRecipes from "../pages/MyRecipes";
+// import AllRecipes from "../pages/AllRecipes";
+const AllRecipes = lazy(() => import("../pages/AllRecipes"));
+const RecipeDetails = lazy(() => import("../pages/RecipeDetails"));
+// import RecipeDetails from "../pages/RecipeDetails";
+// import MyRecipes from "../pages/MyRecipes";
+const MyRecipes = lazy(() => import("../pages/MyRecipes"));
 import UpdateRecipe from "../pages/UpdateRecipe";
 import PrivetRoute from "./PrivetRoute";
-import Home from "../pages/Home";
-import Support from "../components/Support";
+// import Home from "../pages/Home";
+const Home = lazy(() => import("../pages/Home"));
 import Dashboard from "../pages/Dashboard/Dashboard";
-import Gallery from "../pages/Gallery";
+// import Gallery from "../pages/Gallery";
+const Gallery = lazy(() => import("../pages/Gallery"));
 import DashAllRecipes from "../pages/Dashboard/DashAllRecipies";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashMyRecipes from "../pages/Dashboard/DashMyRecipies";
+import LazyLoader from "../components/LazyLoader";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +31,8 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Home,
+        element: <LazyLoader component={Home} />,
+
         loader: () =>
           fetch("https://recipe-book-app-eosin.vercel.app/topRecipes"),
       },
@@ -39,7 +46,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "gallery",
-        Component: Gallery,
+        element:<LazyLoader component={ Gallery} />,
       },
       {
         path: "addRecipe",
@@ -51,14 +58,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "recipes",
-        Component: AllRecipes,
+        element:<LazyLoader component={ AllRecipes} />,
         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
       },
       {
         path: "recipeDetails/:id",
         element: (
           <PrivetRoute>
-            <RecipeDetails />
+             element:<LazyLoader component={ RecipeDetails} />,
           </PrivetRoute>
         ),
         loader: () => fetch("https://recipe-book-app-eosin.vercel.app/recipes"),
@@ -104,7 +111,6 @@ export const router = createBrowserRouter([
       {
         path: "myRecipes",
         Component: DashMyRecipes,
-
       },
     ],
   },
